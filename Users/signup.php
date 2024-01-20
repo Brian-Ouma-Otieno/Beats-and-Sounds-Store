@@ -11,8 +11,8 @@ if(isset($_POST['signup'])){
     $success = true;
 
     // recieving user's inputs
-    if(isset($_POST['username_1'])){
-        $username = Sanitize_input($_POST['username_1']); 
+    if(isset($_POST['firstname'])){
+        $firstname = Sanitize_input($_POST['firstname']); 
     }  
     if(isset($_POST['email_1'])){
         $email = Sanitize_input($_POST['email_1']); 
@@ -25,15 +25,15 @@ if(isset($_POST['signup'])){
     } 
 
     // checking if all the inputs are filled
-    if(empty($username) || empty($email) || empty($password) || empty($password2)){
+    if(empty($firstname) || empty($email) || empty($password) || empty($password2)){
         $error[] = 'Fill in all the Fields.';
         $success = false;
     }
 
     // validate username
-    if(!empty($username)) {
-        if (!preg_match("/^[A-Za-z0-9\s]*$/",$username)) {
-            $error[] = 'Please provide the correct username.';
+    if(!empty($firstname)) {
+        if (!preg_match("/^[A-Za-z0-9\s]*$/",$firstname)) {
+            $error[] = 'Please provide the correct name.';
             $success = false;
         }
     }
@@ -41,7 +41,7 @@ if(isset($_POST['signup'])){
     // validate email
     if(isset($email)){
         if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-            $error[] = 'You must enter a valid email.';
+            $error[] = 'Provide a valid email.';
             $success = false;
         }
     }
@@ -50,27 +50,26 @@ if(isset($_POST['signup'])){
     if (!empty($password)) {
         if (!preg_match("/^[A-Za-z0-9]*$/",$password)) {
             
-            $error[] = 'Please provide the correct password.';
+            $error[] = 'Provide the correct password.';
             $success = false;
         }
     }
 
     // check if the two passwords match
-    if ($password != $password2) {
+    if ($password !== $password2) {
 
         $error[] = 'Your passwords do not match.';
         $success = false;        
     }
 
     // checking if email already exist in database
-    // $reg_users_check = "SELECT * FROM regular_users WHERE email = '$email'";
     if(isset($email)){
         $reg_users_check = "SELECT * FROM regular_users WHERE email = '$email'";
         $reg_users_query = mysqli_query($db_connect,  $reg_users_check);
         $reg_users_num_row = mysqli_num_rows($reg_users_query);
 
         if ($reg_users_num_row > 0) {
-            $error[] = 'Sorry, the email already exist in our records!';
+            $error[] = 'Sorry, the email already exist !';
             $success = false;
         }
     }
@@ -81,7 +80,6 @@ if(isset($_POST['signup'])){
         
 
     }else{
-        // echo 'You have signed in successfully';
 
         // insert data to database
         $reg_users_sql_insert = "INSERT INTO regular_users (username, email, password) VALUES(?, ?, ?);";
@@ -92,7 +90,7 @@ if(isset($_POST['signup'])){
             // harshing password
             $reg_users_password_harsh = password_hash($password,PASSWORD_DEFAULT);
 
-            mysqli_stmt_bind_param($stmt, "sss", $username, $email, $reg_users_password_harsh);
+            mysqli_stmt_bind_param($stmt, "sss", $firstname, $email, $reg_users_password_harsh);
             mysqli_stmt_execute($stmt);                
             header('Location: ../index.php?welcome=ok');
             // echo 'Inserted';
@@ -104,35 +102,21 @@ if(isset($_POST['signup'])){
 
 ?>
 
-<script>
-    var success = <?php echo $success; ?>;
-
-    if(success == false){
-
-        $("#uname, #mail, #pswd, #password2").addClass("form-control.error input");
-        // $("#uname, #mail, #pswd, #password2").removeClass();
-
-    }
-
-</script>
-
-
-
 
 <div class="pos-middle">
     <div class="form-container">
         <form action="signup.php" method="POST" class="form1" id="form1">
-            <div class="form-control success">
-                <input type="text" placeholder="Username" name="username_1" id="uname">
+            <div class="form-control succes">
+                <input type="text" placeholder="Firstname" name="firstname" id="uname">
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
             </div>
-            <div class="form-control error">
+            <div class="form-control erro">
                 <input type="email" placeholder="Email" name="email_1" id="mail">
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
             </div>
-            <div class="form-control">
+            <div class="form-control succes">
                 <input type="password" placeholder="Password" name="password1" id="pswd">
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
@@ -144,8 +128,17 @@ if(isset($_POST['signup'])){
             </div>
             <button id="signup-btn" name="signup" type="submit">SignUp</button>
             <small class="signup-error-message"></small>
+            <div id="pswdRequirement">
+                <h3>Password must contain the following:</h3>
+                <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                <p id="number" class="invalid">A <b>number</b></p>
+                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+            </div>
         </form>
+        
     </div>
+        
 </div>
 
 

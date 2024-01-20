@@ -13,8 +13,6 @@
 
 <h3 class="margin h3">My Cart</h3>
 
-
-
 <?php
     // check if user has logged in and if user has logged in proceed with execution
     if (!isset($_SESSION['reg_user'])) {
@@ -36,39 +34,64 @@
     } else {
 
         // deleting single beat from the cart
-        if (isset($_POST['remove'])) {
-            $sql_cartRemoveid = $_POST['beatremove'];   
+        // if (isset($_POST['remove'])) {
+        //     $sql_cartRemoveid = $_POST['beatremove'];   
 
-            // updating feature and regUsercartid
-            $sql_selectBeatid = "SELECT beat_id FROM cart WHERE id = $sql_cartRemoveid AND reg_userCartid = $_SESSION[reg_user]";
-            $cart_queryBeatid = mysqli_query($db_connect,$sql_selectBeatid);
-            $sql_BeatidFetch = mysqli_fetch_assoc($cart_queryBeatid);
-            $BeatidFetch = $sql_BeatidFetch['beat_id'];
-            $featureUsercartidUpdate = "UPDATE beats SET featured = 0, reg_userCartid = 0 WHERE id = $BeatidFetch AND reg_userCartid = $_SESSION[reg_user]";
-            mysqli_query($db_connect,$featureUsercartidUpdate);
+        //     // updating feature and regUsercartid
+        //     $sql_selectBeatid = "SELECT beat_id FROM cart WHERE id = $sql_cartRemoveid AND reg_userCartid = $_SESSION[reg_user]";
+        //     $cart_queryBeatid = mysqli_query($db_connect,$sql_selectBeatid);
+        //     $sql_BeatidFetch = mysqli_fetch_assoc($cart_queryBeatid);
+        //     $BeatidFetch = $sql_BeatidFetch['beat_id'];
+        //     $featureUsercartidUpdate = "UPDATE beats SET featured = 0, reg_userCartid = 0 WHERE id = $BeatidFetch AND reg_userCartid = $_SESSION[reg_user]";
+        //     mysqli_query($db_connect,$featureUsercartidUpdate);
 
-            // delete beat from cart 
-            $sql_cartRemove = "DELETE FROM cart WHERE id = $sql_cartRemoveid";
-            mysqli_query($db_connect,$sql_cartRemove);
-        }
+        //     // delete beat from cart 
+        //     $sql_cartRemove = "DELETE FROM cart WHERE id = $sql_cartRemoveid";
+        //     mysqli_query($db_connect,$sql_cartRemove);
+        // }
 
-        // deleting multiple beats from the cart
-        if (isset($_POST['removeAll'])) {
-            $sql_cartRemoveall = $_POST['beatremoveAll'];
+        // // deleting multiple beats from the cart
+        // if (isset($_POST['removeAll'])) {
+        //     $sql_cartRemoveall = $_POST['beatremoveAll'];
            
-            // updating feature and regUsercartid
-            $featureUsercartidUpdate2 = "UPDATE beats SET featured = 0, reg_userCartid = 0 WHERE reg_userCartid = $_SESSION[reg_user]";
-            mysqli_query($db_connect,$featureUsercartidUpdate2);
+        //     // updating feature and regUsercartid
+        //     $featureUsercartidUpdate2 = "UPDATE beats SET featured = 0, reg_userCartid = 0 WHERE reg_userCartid = $_SESSION[reg_user]";
+        //     mysqli_query($db_connect,$featureUsercartidUpdate2);
 
-            // delete all beats from cart
-            $sql_cartRemoveallQuery = "DELETE FROM cart WHERE reg_userCartid = $sql_cartRemoveall";
-            mysqli_query($db_connect,$sql_cartRemoveallQuery);
+        //     // delete all beats from cart
+        //     $sql_cartRemoveallQuery = "DELETE FROM cart WHERE reg_userCartid = $sql_cartRemoveall";
+        //     mysqli_query($db_connect,$sql_cartRemoveallQuery);
+        // }
+
+        
+        //  Auto delete items from cart 
+        $sql_selectCart = "SELECT * FROM cart WHERE reg_userCartid = $_SESSION[reg_user]";
+        $sql_selectCartQuery = mysqli_query($db_connect,$sql_selectCart);
+                
+        while ($sql_selectCartFetch = mysqli_fetch_assoc($sql_selectCartQuery)) { 
+    
+            $selectCartDate = $sql_selectCartFetch['expire_date'];
+            $selectCartBeatid = $sql_selectCartFetch['beat_id'];
+    
+            $date=date_create($selectCartDate);
+            date_add($date,date_interval_create_from_date_string("1 day"));
+            $selectCartDateFormart = date_format($date,"Y-m-d H:i:s");
+            
+            date_default_timezone_set("Africa/Nairobi");
+            $nowDate = date("Y-m-d H:i:s");
+            if ($selectCartDateFormart <= $nowDate) { 
+                $sql_cartRemove = "DELETE FROM cart WHERE reg_userCartid = $_SESSION[reg_user] AND expire_date = '$selectCartDate'"; 
+                mysqli_query($db_connect,$sql_cartRemove);
+                $featuredSql = "UPDATE beats SET featured = 0, reg_userCartid = 0 WHERE id = $selectCartBeatid AND reg_userCartid = $_SESSION[reg_user]";
+                mysqli_query($db_connect,$featuredSql);        
+            } 
         }
+
 ?> 
 
         <?php  while($cart_fetch = mysqli_fetch_assoc($cart_query)):  ?>
             
-                <div class="margin pos-middle cart-container">
+                <div id="reload" class="margin pos-middle cart-container">
                     <div class="pos-middle item-img genre-container-s-pic" style="background-image: url('<?= $cart_fetch['image']; ?>'); background-size: cover;">
                         <button title="play"><i class="fas fa-play"></i></button>
                     </div>
@@ -85,9 +108,7 @@
                             <button title="check out" id="<?= $cart_fetch['id']; ?>" name="checkoutBtn">Check Out</i></button>   
                         </form>
                         <div class="col-1">
-                        <form action="cart.php" method="post" >
-                            <input type="hidden" name="beatremove" value="<?= $cart_fetch['id'];?>"> <button type="submit" name="remove" title="remove" onclick="autoRefresh()">Remove</button>
-                        </form> 
+                            <input type="hidden" name="beatremove" value="<?= $cart_fetch['id'];?>"> <button type="submit" name="remove" title="remove" onclick="del(<?= $cart_fetch['id'];?>)">Remove</button>
                         </div>                      
                     </div>
                 </div>
@@ -106,9 +127,7 @@
         <button type="submit"  name="checkOutAll" value="">Check Out All</button>       
     </div>
     <div class="form-group-child col-2 <?=((isset($_SESSION['reg_user']) && $cart_query_num_rows <= 0 || !isset($_SESSION['reg_user']))?'disabled':'');?>">
-        <form action="cart.php" method="post">
-            <input type="hidden" name="beatremoveAll" value="<?= ((isset($_SESSION['reg_user']))? $_SESSION['reg_user']:'0');?>"> <button type="submit" name="removeAll" title="remove all" onclick="autoRefresh()">Remove All</button>               
-        </form>     
+        <input type="hidden" name="beatremoveAll" value="<?= ((isset($_SESSION['reg_user']))? $_SESSION['reg_user']:'0');?>"> <button type="submit" name="removeAll" title="remove all" onclick="delAll(<?= $_SESSION['reg_user'];?>)">Remove All</button>               
     </div>
 </div>
 
@@ -144,27 +163,27 @@
 <!-- Auto delete items from cart -->
 <?php
 
-    $sql_selectCart = "SELECT * FROM cart WHERE reg_userCartid = $_SESSION[reg_user]";
-    $sql_selectCartQuery = mysqli_query($db_connect,$sql_selectCart);
+    // $sql_selectCart = "SELECT * FROM cart WHERE reg_userCartid = $_SESSION[reg_user]";
+    // $sql_selectCartQuery = mysqli_query($db_connect,$sql_selectCart);
             
-    while ($sql_selectCartFetch = mysqli_fetch_assoc($sql_selectCartQuery)) { 
+    // while ($sql_selectCartFetch = mysqli_fetch_assoc($sql_selectCartQuery)) { 
 
-        $selectCartDate = $sql_selectCartFetch['expire_date'];
-        $selectCartBeatid = $sql_selectCartFetch['beat_id'];
+    //     $selectCartDate = $sql_selectCartFetch['expire_date'];
+    //     $selectCartBeatid = $sql_selectCartFetch['beat_id'];
 
-        $date=date_create($selectCartDate);
-        date_add($date,date_interval_create_from_date_string("1 day"));
-        $selectCartDateFormart = date_format($date,"Y-m-d H:i:s");
+    //     $date=date_create($selectCartDate);
+    //     date_add($date,date_interval_create_from_date_string("1 day"));
+    //     $selectCartDateFormart = date_format($date,"Y-m-d H:i:s");
         
-        date_default_timezone_set("Africa/Nairobi");
-        $nowDate = date("Y-m-d H:i:s");
-        if ($selectCartDateFormart <= $nowDate) {
-            $sql_cartRemove = "DELETE FROM cart WHERE reg_userCartid = $_SESSION[reg_user] AND expire_date = '$selectCartDate'"; 
-            mysqli_query($db_connect,$sql_cartRemove);
-            $featuredSql = "UPDATE beats SET featured = 0, reg_userCartid = 0 WHERE id = $selectCartBeatid AND reg_userCartid = $_SESSION[reg_user]";
-            mysqli_query($db_connect,$featuredSql);        
-        } 
-    }
+    //     date_default_timezone_set("Africa/Nairobi");
+    //     $nowDate = date("Y-m-d H:i:s");
+    //     if ($selectCartDateFormart <= $nowDate) {
+    //         $sql_cartRemove = "DELETE FROM cart WHERE reg_userCartid = $_SESSION[reg_user] AND expire_date = '$selectCartDate'"; 
+    //         mysqli_query($db_connect,$sql_cartRemove);
+    //         $featuredSql = "UPDATE beats SET featured = 0, reg_userCartid = 0 WHERE id = $selectCartBeatid AND reg_userCartid = $_SESSION[reg_user]";
+    //         mysqli_query($db_connect,$featuredSql);        
+    //     } 
+    // }
 
     include '../Includes/footer.php';
 ?>

@@ -104,7 +104,7 @@
                 <p>Duration: 3:00</p>  
                 <p id="price">Price: <?= $afro_fetch2['price']; ?></p>  
             </div>
-            <form action="afrobeats.php?featured=<?= (($afro_fetch2['featured'] == 0)?'1':'0');?>&id=<?= $afro_fetch2['id']; ?>" method="post" ><input type="hidden" name="beat_id" value="<?= $afro_fetch2['id'];?>"> <button name="addToCart" title="add to cart" onclick="add_to_cart(<?= $afro_fetch2['id']; ?>)">Add to Cart <i class="fas fa-shopping-cart"></i></button></form> 
+            <form action="afrobeats.php?featured=<?= (($afro_fetch2['featured'] == 0)?'1':'0');?>&id=<?= $afro_fetch2['id']; ?>" method="post" ><input type="hidden" name="beat_id" value="<?= $afro_fetch2['id'];?>"> <button name="addToCart" title="add to cart" onclick="autoRefresh()">Add to Cart <i class="fas fa-shopping-cart"></i></button></form> 
         </div>  
         <!-- <div class="countdown-timer">
             <h4>Available at:  </h4><p class="countdown-time" id="timer"> </p>

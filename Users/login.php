@@ -5,76 +5,76 @@ require_once '../Functions/functions.php';
 // include '../Includes/head.php';
 // include '../Includes/navbar.php';
 
-if (isset($_POST['login'])) {
+// if (isset($_POST['login'])) {
 
-    $email = sanitize_input($_POST['log_mail']);
-    $password = sanitize_input($_POST['log_password']);
+//     $email = sanitize_input($_POST['log_mail']);
+//     $password = sanitize_input($_POST['log_password']);
 
-    $error = array();
-    $success = true;
+//     $error = array();
+//     $success = true;
 
-    if(empty($email) || empty($password)){
-        $error[] = 'You must provide email and Password.';
-        $success = false;
+//     if(empty($email) || empty($password)){
+//         $error[] = 'You must provide email and Password.';
+//         $success = false;
 
-    } 
+//     } 
 
-    // validate email
-    if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-        $error[] = 'You must enter a valid email.';
-        $success = false;
-    }
+//     // validate email
+//     if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+//         $error[] = 'You must enter a valid email.';
+//         $success = false;
+//     }
     
-    if (!empty($password)) {
-        if (!preg_match("/^[A-Za-z0-9\s]*$/",$password)) {
+//     if (!empty($password)) {
+//         if (!preg_match("/^[A-Za-z0-9\s]*$/",$password)) {
             
-            $error[] = 'Please provide the correct password.';
-            $success = false;
-        }
-    }
+//             $error[] = 'Please provide the correct password.';
+//             $success = false;
+//         }
+//     }
 
-    // check if email exist in database
-    $user_query = mysqli_query($db_connect,"SELECT * FROM regular_users WHERE email = '$email'");
-    $user_fetch = mysqli_fetch_assoc($user_query);
-    $userCount = mysqli_num_rows($user_query);
-    if($userCount < 1){
-        $error[] = 'That email doesn\'t exist in our database';
-        $success = false;
-    }
+//     // check if email exist in database
+//     $user_query = mysqli_query($db_connect,"SELECT * FROM regular_users WHERE email = '$email'");
+//     $user_fetch = mysqli_fetch_assoc($user_query);
+//     $userCount = mysqli_num_rows($user_query);
+//     if($userCount < 1){
+//         $error[] = 'That email doesn\'t exist in our database';
+//         $success = false;
+//     }
 
-    if(!password_verify($password, @$user_fetch['password'])){
-        $error[] = 'The password does not match our records.Please try again';
-        $success = false;
-    }
+//     if(!password_verify($password, @$user_fetch['password'])){
+//         $error[] = 'The password does not match our records.Please try again';
+//         $success = false;
+//     }
 
-    // check for errors
-    if($success == false){
-        echo display_errors($error[0]);
+//     // check for errors
+//     if($success == false){
+//         echo display_errors($error[0]);
 
-    }else{
+//     }else{
 
-        $reg_user_id = $user_fetch['id'];
+//         $reg_user_id = $user_fetch['id'];
 
-        $checkIfuserActive = "SELECT * FROM regular_users WHERE id = '$reg_user_id' AND reg_userStatus = 1";
-        $checkIfuserActiveQuery = mysqli_query($db_connect,$checkIfuserActive);
-        $checkIfuserActiveNumRows = mysqli_num_rows($checkIfuserActiveQuery);
+//         $checkIfuserActive = "SELECT * FROM regular_users WHERE id = '$reg_user_id' AND reg_userStatus = 1";
+//         $checkIfuserActiveQuery = mysqli_query($db_connect,$checkIfuserActive);
+//         $checkIfuserActiveNumRows = mysqli_num_rows($checkIfuserActiveQuery);
 
-        // check if user is already active
-        if ($checkIfuserActiveNumRows > 0) {
-            $userExist = 'User Already Active';
-            echo display_errors($userExist);
-        } else {
-            // log user in       
-            reg_user_login($reg_user_id);
-            header("Location: /Beats and sounds store");
-        }
+//         // check if user is already active
+//         if ($checkIfuserActiveNumRows > 0) {
+//             $userExist = 'User Already Active';
+//             echo display_errors($userExist);
+//         } else {
+//             // log user in       
+//             reg_user_login($reg_user_id);
+//             header("Location: /Beats and sounds store");
+//         }
                
-    }
+//     }
     
 
-}else {
-    // header("Location: /Beats and sounds store");
-}
+// }else {
+//     // header("Location: /Beats and sounds store");
+// }
 
 include '../Includes/head.php';
 include '../Includes/navbar.php';
@@ -83,9 +83,9 @@ include '../Includes/navbar.php';
 
 
 <?php
-    // if (isset($_SESSION['reg_user'])) {
-    //     echo '<a class="pos-middle tomato" title="home" href="/Beats and sounds store/">Go To Home Page</i></a>';
-    // } else { 
+    if (isset($_SESSION['reg_user'])) {
+        echo '<a class="pos-middle tomato" title="home" href="/Beats and sounds store/">Go To Home Page</i></a>';
+    } else { 
 ?>
 
 <!-- login form -->
@@ -108,13 +108,20 @@ include '../Includes/navbar.php';
             </div>
             <button type="submit" id="log_btn" name="login">Login</button>
             <small class="login-error-message"></small> <br>
+            <?php  
+                if (isset($_POST['login'])) {
+                    $email = sanitize_input($_POST['log_mail']);
+                    $password = sanitize_input($_POST['log_password']);
+                    validateLogin($email,$password);
+                }
+            ?>
             <p>Forgot password?</p><a href="/Beats and sounds store/users/reset-password.php" class="links">Click here</a>
         </form>
     </div>
 </div>
 
 <?php
-    // }   
+    }   
 ?>
 
 

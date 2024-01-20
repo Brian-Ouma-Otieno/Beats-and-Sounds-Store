@@ -16,7 +16,7 @@
 
     function display_errors($error){
         $display = '<ul class="bg-danger">';
-            $display .= '<li class="tomato pos-middle" style="margin-top:20px;">'.$error.'</li>';
+            $display .= '<li class="tomato pos-middle" style="padding:20px;">'.$error.'</li>';
         $display .= '</ul>';
         return $display;
     }
@@ -64,6 +64,79 @@
     }
 
 
+    // processing login details
+    function validateLogin($email,$password)  { 
+        
+        $error = array();
+        $success = true;
+        global $db_connect;
+
+        if(empty($email) || empty($password)){
+            $error[] = 'Please provide email and Password.';
+            $success = false;
+
+        } 
+
+        // validate email
+        if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+            $error[] = 'Provide a valid email.';
+            $success = false;
+        }
+        
+        if (!empty($password)) {
+            if (!preg_match("/^[A-Za-z0-9\s]*$/",$password)) {
+                
+                $error[] = 'Provide the correct password.';
+                $success = false;
+            }
+        }
+
+        // check if email exist in database
+        $user_query = mysqli_query($db_connect,"SELECT * FROM regular_users WHERE email = '$email'");
+        $user_fetch = mysqli_fetch_assoc($user_query);
+        $userCount = mysqli_num_rows($user_query);
+        if($userCount < 1){
+            $error[] = 'Provide the correct email.';
+            $success = false;
+        }
+
+        if(!password_verify($password, @$user_fetch['password'])){
+            $error[] = 'The email and password does not match.';
+            $success = false;
+        }
+
+        // check for errors
+        if($success == false){
+            echo display_errors($error[0]);
+
+        }else{
+
+            $reg_user_id = $user_fetch['id'];
+
+            $checkIfuserActive = "SELECT * FROM regular_users WHERE id = '$reg_user_id' AND reg_userStatus = 1";
+            $checkIfuserActiveQuery = mysqli_query($db_connect,$checkIfuserActive);
+            $checkIfuserActiveNumRows = mysqli_num_rows($checkIfuserActiveQuery);
+
+            // check if user is already active
+            if ($checkIfuserActiveNumRows > 0) {
+                $userExist = 'User Already Active';
+                echo display_errors($userExist);
+                // $error[] = 'User Already Active';
+                // $success = false;
+            } else {
+                // log user in       
+                reg_user_login($reg_user_id);
+                // header("Location: /Beats and sounds store");
+            }
+                
+        }
+            
+            // if($success == false){
+            //     echo display_errors($error[0]);
+            // }
+    
+        // return display_errors($error[0]);
+    }
 
 
 

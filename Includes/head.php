@@ -11,9 +11,9 @@
     <!-- <link rel="stylesheet" href="/Beats and sounds store/js/bootstrap.min.js"> -->
     <!-- <link rel="stylesheet" href="/Beats and sounds store/fontawesome-free-6.1.1-web\css\all.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- <script src="/Beats and sounds store/Jquery/jquery-3.6.0.min (1).js"></script> -->
+    <script src="/Beats and sounds store/Jquery/jquery-3.6.0.min (1).js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
     <!-- <script src="https://unpkg.com/wavesurfer.js@7"></script> -->
     <!-- <script src="/Beats and sounds store/katspaugh-wavesurfer.js-edccdc3/src/wavesurfer.js"></script> -->
     <style>

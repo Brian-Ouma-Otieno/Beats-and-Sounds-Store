@@ -67,7 +67,7 @@
     $(document).ready(function(){
         $("#live_search").keyup(function(){
 
-            var input = $(this).val();
+            let input = $(this).val();
             
             if (input != "") {
                 $.ajax({
@@ -80,7 +80,7 @@
                     }
                 });
             } else {
-                $("#search_results").css("display","none");
+                $("#search_results").css("display","block");
             }
         });
     });
@@ -107,38 +107,99 @@
         
     }
 
-    // // Set the date we're counting down to
-    // var countDownDate = new Date("oct 25, 2023 00:00:00").getTime();
-   
-    // // Update the count down every 1 second
-    // var x = setInterval(function() {
-
-    // // Get today's date and time
-    // var now = new Date().getTime();
-        
-    // // Find the distance between now and the count down date
-    // var distance = countDownDate - now;
-        
-    // // Time calculations for days, hours, minutes and seconds
-    // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    // var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-    // // Output the result in an element with id="demo"
-    // document.getElementById("timer").innerHTML = days + "d " + hours + "h "
-    // + minutes + "m " + seconds + "s ";
-        
-    // // If the count down is over, write some text 
-    // if (distance < 0) {
-    //     clearInterval(x);
-    //     document.getElementById("timer").innerHTML = "EXPIRED";
-    // }
-    // }, 1000);
     
-    function autoRefresh() {
-        console.log('Hello');
+    // function del(id) {
+    //     var del = id;
+    //     var data = {"Delid" : del};
+
+    //     $(document).ready(function () {
+
+    //         jQuery.ajax({
+    //             url : '/Beats and sounds store/Cart/cartHandler.php',
+    //             method : 'POST',
+    //             data : data,   
+    //             success: function(response){
+    //                 $(document).ready(function () {        
+    //                 setTimeout(function(){ location.reload(true);},10);        
+    //                 // setTimeout(function(){ alert("Deleted");},1000);        
+    //             });},                                       
+    //             error : function(){alert("Something went wrong");}
+    //         }); 
+    //     });
+
+        
+    // }
+
+    // const genreModall = document.getElementById("genre-modal");
+    // const genreBtnn = document.getElementById("genre-btn");
+    // genreBtnn.addEventListener('click', () => {
+    //     genreModall.classList.toggle('hide');
+    // //   console.log('hello');
+    // //   alert('hello');
+    // });
+
+    // function autoRefresh() {
+    //     $(document).ready(function () {        
+    //         setTimeout(function(){ location.reload(true);},1000);        
+    //     });
+    // }
+    
+    const pswdRequirement = document.getElementById('pswdRequirement');
+    const password = document.getElementById('pswd');
+    const letter = document.getElementById("letter");
+    const frm = document.querySelector('.frm');
+
+    // When the user clicks on the password field, show the message box
+    password.onfocus = function() {
+        pswdRequirement.style.display = "block";
     }
+
+    // When the user clicks outside of the password field, hide the message box
+    password.onblur = function() {
+        pswdRequirement.style.display = "none";
+    }
+
+    password.onkeyup = function() {
+        // Validate lowercase letters
+        const lowerCaseLetters = /[a-z]/g;          
+        if(password.value.match(lowerCaseLetters)) {  
+            letter.classList.remove("invalid");
+            letter.classList.add("valid");
+        } else {
+            letter.classList.remove("valid");
+            letter.classList.add("invalid");
+        }
+
+        // Validate capital letters
+        const upperCaseLetters = /[A-Z]/g;
+        if(password.value.match(upperCaseLetters)) {  
+            capital.classList.remove("invalid");
+            capital.classList.add("valid");
+        } else {
+            capital.classList.remove("valid");
+            capital.classList.add("invalid");
+        }
+
+        // Validate numbers
+        const numbers = /[0-9]/g;
+        if(password.value.match(numbers)) {  
+            number.classList.remove("invalid");
+            number.classList.add("valid");
+        } else {
+            number.classList.remove("valid");
+            number.classList.add("invalid");
+        }
+        
+        // Validate length
+        if(password.value.length >= 8) {
+            length.classList.remove("invalid");
+            length.classList.add("valid");
+        } else {
+            length.classList.remove("valid");
+            length.classList.add("invalid");
+        }
+    }
+
 
 </script>
 

@@ -37,6 +37,21 @@
     color: #FF6347;
 }
 
+/* .hide{
+    display: block;
+    transform: translateX(-50%);
+    width: 100%;   
+    height: 600px;
+} */
+
+/* .show{
+    display: block;
+} */
+
+/* .l-hide a{
+    display: none;
+} */
+
 
 /* navbar section */
 nav{
@@ -217,6 +232,15 @@ nav a:hover {
     margin-bottom: 10px;
 }
 
+#pswdRequirement {
+    display:none;
+    background: #f1f1f1;
+    color: #e74c3c;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
 .form1 small{
     color: #e74c3c;
     /* visibility: visible; */
@@ -258,6 +282,29 @@ a.links:link{
     color: #8e44ad;
 	/* text-decoration: none; */
 }
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+    color: #2ecc71;
+}
+  
+.valid:before {
+    position: relative;
+    left: -5px;
+    content: "✔";
+}
+  
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+    color: #e74c3c;
+}
+  
+.invalid:before {
+    position: relative;
+    left: -5px;
+    content: "✖";
+}
+
 
 
 /* display and search section */

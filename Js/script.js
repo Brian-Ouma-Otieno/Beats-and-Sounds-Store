@@ -1,23 +1,25 @@
 // Get the modal
-var genreModal = document.getElementById("genre-modal");
+const genreModal = document.getElementById("genre-modal");
 
 // Get the button that opens the modal
-var genreBtn = document.getElementById("genre-btn");
+const genreBtn = document.getElementById("genre-btn");
 
 // Get the <span> element that closes the modal
-var genreSpan = document.getElementById("genre-close");
+const genreSpan = document.getElementById("genre-close");
 
 // When the user clicks the button, open the modal 
-genreBtn.onclick = function() {
-  genreModal.style.display = "block";
-}
+genreBtn.addEventListener('click', () => {
+  // genreModal.classList.toggle('show');
+  // genreModal.classList.toggle('hide');
+  genreModal.style.display = "block";   
+});
 
 // When the user clicks on <span> (x), close the modal
-genreSpan.onclick = function() {
+genreSpan.addEventListener('click', () => {
   genreModal.style.display = "none";
-}
+});
 
-// When the user clicks anywhere outside of the modal, close it
+// // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == genreModal) {
     genreModal.style.display = "none";
@@ -91,14 +93,24 @@ prev.addEventListener('click', () => {
 // next.onclick = function(){alert("hello");} 
 
 
-
-
-
 const form = document.getElementById('form1');
 const username = document.getElementById('uname');
 const email = document.getElementById('mail');
-const password = document.getElementById('pswd');
+// const password = document.getElementById('pswd');
 const password2 = document.getElementById('password2');
+// const pswdRequirement = document.getElementById('pswdRequirement');
+
+
+// // When the user clicks on the password field, show the message box
+// password.onfocus = function() {
+//   pswdRequirement.style.display = "block";
+// }
+
+// // When the user clicks outside of the password field, hide the message box
+// password.onblur = function() {
+//   pswdRequirement.style.display = "none";
+// }
+
 
 // form.addEventListener('submit', (e) => {
 //   e.preventDefault;
@@ -148,7 +160,66 @@ const password2 = document.getElementById('password2');
 // console.log(c);
 
 
+// deleting cart items
+function del(id) {
+  let del = id;
+  let data = {"Delid" : del};
 
+  $(document).ready(function () {
+
+      jQuery.ajax({
+          url : '/Beats and sounds store/Cart/cartHandler.php',
+          method : 'POST',
+          data : data,   
+          success: function(response){
+              $(document).ready(function () {        
+              setTimeout(function(){ location.reload(true);},10);                
+          });},                                       
+          error : function(){alert("Something went wrong");}
+      }); 
+  }); 
+}
+
+function delAll(idAll) {
+  let delAll = idAll;
+  let dataAll = {"delAllid" : delAll};
+
+  $(document).ready(function () {
+
+      jQuery.ajax({
+          url : '/Beats and sounds store/Cart/cartAllhandler.php',
+          method : 'POST',
+          data : dataAll,   
+          success: function(response){
+              $(document).ready(function () {        
+              setTimeout(function(){ location.reload(true);},10);                
+          });},                                       
+          error : function(){alert("Something went wrong");}
+      }); 
+  });  
+}
+
+// auto cart delete
+function autoDel(autocartDel1, autocartDel2, autocartDel3 ) {
+  let autocartDlt1 = autocartDel1;
+  let autocartDlt2 = autocartDel2;
+  let autocartDlt3 = autocartDel3;
+  let autoDeldata = {"cartAutoDelluserId" : autocartDlt1, "selectCartDate" : autocartDlt2, "selectCartBeatid" : autocartDlt3 };
+
+  $(document).ready(function () {
+
+      jQuery.ajax({
+          url : '/Beats and sounds store/Cart/autocartDel.php',
+          method : 'POST',
+          data : autoDeldata,   
+          success: function(response){
+              $(document).ready(function () {        
+              setTimeout(function(){ location.reload(true);},10);                
+          });},                                       
+          error : function(){alert("Something went wrong");}
+      }); 
+  });  
+}
 
 
 
