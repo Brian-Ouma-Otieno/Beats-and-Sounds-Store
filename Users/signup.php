@@ -48,6 +48,15 @@ if(isset($_POST['signup'])){
 
     // validate password
     if (!empty($password)) {
+        // check password length
+        $passwordLength = strlen($password);
+        if ($passwordLength < 8) {
+            
+            $error[] = 'Your password is to short.';
+            $success = false;
+        }
+
+        // check regular expression
         if (!preg_match("/^[A-Za-z0-9]*$/",$password)) {
             
             $error[] = 'Provide the correct password.';
@@ -107,22 +116,22 @@ if(isset($_POST['signup'])){
     <div class="form-container">
         <form action="signup.php" method="POST" class="form1" id="form1">
             <div class="form-control succes">
-                <input type="text" placeholder="Firstname" name="firstname" id="uname">
+                <input type="text" placeholder="Firstname" name="firstname" id="uname" required>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
             </div>
             <div class="form-control erro">
-                <input type="email" placeholder="Email" name="email_1" id="mail">
+                <input type="email" placeholder="Email" name="email_1" id="mail" required>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
             </div>
             <div class="form-control succes">
-                <input type="password" placeholder="Password" name="password1" id="pswd">
+                <input type="password" placeholder="Password" name="password1" id="pswd" required>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
             </div>
             <div class="form-control">
-                <input type="password" placeholder="Confirm Password" name="password2" id="password2">
+                <input type="password" placeholder="Confirm Password" name="password2" id="password2" required>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
             </div>
@@ -130,6 +139,7 @@ if(isset($_POST['signup'])){
             <small class="signup-error-message"></small>
             <div id="pswdRequirement">
                 <h3>Password must contain the following:</h3>
+                <!-- <p id="specialCharacter" class="invalid">A <b>special character (e.g @,#,%,&)</b></p> -->
                 <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
                 <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
                 <p id="number" class="invalid">A <b>number</b></p>

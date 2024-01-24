@@ -86,25 +86,25 @@
     });
 
 
-    function add_to_cart(id){       
-        // var beat_id = id;
-       
-        // var pack_id = '<?= 0; ?>';
-        // var pack_name = '<?= 0; ?>';
-        // var pack_price = '<?= 0; ?>';
-        // var pack_author = '<?= 0; ?>';
+    function addTocart(id){       
+        const beatId = id;
+        // const feature = featured;
         
-        // var data = {"Bid" : beat_id, "beat_name" : beat_name, "author" : author, "price" : price, 
-        //             "Pid" : pack_id, "pack_name" : pack_name, "pack_author" : pack_author, "pack_price" : pack_price
-        //             };
-        // jQuery.ajax({
-        //     // url : '/Beats and sounds store/Cart/add_to_cart.php',
-        //     // url : '/Beats and sounds store/Genres/afrobeats.php',
-        //     method : 'POST',
-        //     data : data,                                
-        //     error : function(){alert("Something went wrong");}
-        // });
-        
+        const data = {"Bid" : beatId};
+        // const data = {"Bid" : beatId, "featured" : feature};
+        $(document).ready(function () {
+            
+            jQuery.ajax({
+                url : '/Beats and sounds store/Genres/addTocart.php',
+                method : 'POST',
+                data : data,   
+                success: function(response){
+                    $(document).ready(function () {        
+                    setTimeout(function(){ location.reload(true);},10);                
+                });},                                       
+                error : function(){alert("Something went wrong");}
+            }); 
+        }); 
     }
 
     
@@ -147,6 +147,8 @@
     const pswdRequirement = document.getElementById('pswdRequirement');
     const password = document.getElementById('pswd');
     const letter = document.getElementById("letter");
+    const length = document.getElementById("length");
+    const specialChar = document.getElementById("specialCharacter");
     const frm = document.querySelector('.frm');
 
     // When the user clicks on the password field, show the message box
@@ -160,6 +162,16 @@
     }
 
     password.onkeyup = function() {
+        // Validate special characters
+        // const specialChar = /(@|#|&|%)/g;         
+        // if(password.value.match(specialChar)) {  
+        //     letter.classList.remove("invalid");
+        //     letter.classList.add("valid");
+        // } else {
+        //     letter.classList.remove("valid");
+        //     letter.classList.add("invalid");
+        // }
+
         // Validate lowercase letters
         const lowerCaseLetters = /[a-z]/g;          
         if(password.value.match(lowerCaseLetters)) {  
