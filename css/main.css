@@ -135,12 +135,10 @@ nav a:hover {
 } */
 
 .form-container{
-    background-color: rgb(213, 225, 231);
+    /* background-color: rgb(213, 225, 231); */
     border-radius: 5px;
-    /* overflow: hidden; */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     width: 400px;
-    /* max-width: 100%; */
     margin-left: 20px;
     position: relative;
     margin-top: 20px;
@@ -270,11 +268,13 @@ nav a:hover {
     position: absolute;
     right: 10px;
     top: 2px;
-    font-size: 20px;
+    font-size: 40px;
+    color: #aaaaaa;
 }
 
 .close:hover {
     cursor: pointer;
+    color: #FF6347;
 }
 
 a.links:link{
@@ -759,6 +759,34 @@ td a:hover{
 .cart-container p{
     color: #000000;
 }
+
+.cartOrderprocess{
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: 400px;
+}
+
+.cartPop-up{
+    z-index: 1;
+    border: 4px solid #aaaaaa;
+    width: 50%;
+    padding: 50px;
+    position: relative;   
+    background-color: #fefefe;
+}
+
+.cartModalPos{
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */ 
+}
+
 
 
 /* admin beats, genre, samples section */

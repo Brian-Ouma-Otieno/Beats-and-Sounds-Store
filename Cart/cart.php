@@ -103,10 +103,10 @@
                     </div>
                     <p>Price: <?= $cart_fetch['price']; ?></p>
                     <div class="margin genre-container-s-btn pos-middle">
-                        <form action="processingOrders.php" method="post">
+                        <!-- <form action="processingOrders.php" method="post"> -->
                             <input type="hidden" name="checkout" value="<?= $cart_fetch['id'];?>">
-                            <button title="check out" id="<?= $cart_fetch['id']; ?>" name="checkoutBtn">Check Out</i></button>   
-                        </form>
+                            <button title="check out" id="checkOut" name="checkoutBtn">Check Out</i></button>   
+                        <!-- </form> -->
                         <div class="col-1">
                             <input type="hidden" name="beatremove" value="<?= $cart_fetch['id'];?>"> <button type="submit" name="remove" title="remove" onclick="del(<?= $cart_fetch['id'];?>)">Remove</button>
                         </div>                      
@@ -126,8 +126,8 @@
     <div class="form-group-child <?=((isset($_SESSION['reg_user']) && $cart_query_num_rows <= 0 || !isset($_SESSION['reg_user']))?'disabled':'');?>">             
         <button type="submit"  name="checkOutAll" value="">Check Out All</button>       
     </div>
-    <div class="form-group-child col-2 <?=((isset($_SESSION['reg_user']) && $cart_query_num_rows <= 0 || !isset($_SESSION['reg_user']))?'disabled':'');?>">
-        <input type="hidden" name="beatremoveAll" value="<?= ((isset($_SESSION['reg_user']))? $_SESSION['reg_user']:'0');?>"> <button type="submit" name="removeAll" title="remove all" onclick="delAll(<?= $_SESSION['reg_user'];?>)">Remove All</button>               
+    <div class="form-group-child col-2 <?=((isset($_SESSION['reg_user']) && $cart_query_num_rows <= 0 || !isset($_SESSION['reg_user']))?'disabled':'');?>">               
+         <button type="submit" name="removeAll" title="remove all" onclick="delAll(<?= ((isset($_SESSION['reg_user']))?$_SESSION['reg_user']:'') ;?>)">Remove All</button>               
     </div>
 </div>
 
@@ -158,6 +158,42 @@
         </table>
     </div>
 </div>
+
+
+
+<div class="pos-middle cartModalPos" id="cartModal">   
+    <div class="cartPop-up pos-middle">
+        <span class="close" id="modalClose">&times;</span>
+        <div class="cartOrderprocess">     
+            <form action="processOrder.php" method="post" class="form1" id="processOrder">
+                <div class="form-control">
+                    <label for="">Username</label>
+                    <input type="text" id="checkOutusername" value="<?= ((isset($PcheckOutFetch['username']))? $PcheckOutFetch['username']:'') ;?>" readonly>
+                </div>
+                <div class="form-control">
+                    <label for="">Email</label>
+                    <input type="email" id="checkOutmail" value="<?= ((isset($PcheckOutFetch['email']))? $PcheckOutFetch['email']:'');?>" readonly>
+                </div>
+                <div class="form-control">
+                    <label for="">Phone Number</label>
+                    <input type="text" id="checkOutnum" name="num" placeholder="Enter Phone Number eg. 07xxxxxxxx">
+                </div>  
+                <div class="form-control">
+                    <label for="">Pin Code</label>
+                    <input type="text" id="checkOutpin" value="<?= ((isset($pinCode))? $pinCode:'');?>" readonly>
+                </div>
+                
+                <div class="form-group-child">               
+                    <button type="submit" id="checkOutbtn"  name="ProChkOut" value="">Confirm Purchase</button>
+                </div>
+                <div class="chkMessage"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 <!-- Auto delete items from cart -->

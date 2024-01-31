@@ -1,6 +1,13 @@
 <?php
     require_once '../DB/beats&sounds_db.php'; 
     include '../Functions/functions.php';
+
+    if (isset($_POST['chkOutbtn'])) {
+        $phone_number = $_POST['chkNum'];
+        echo $phone_number;
+    }
+
+
     if (isset($_SESSION['reg_user'])) {
 
         $sqlPcheckOut = "SELECT * FROM regular_users WHERE id = $_SESSION[reg_user]";

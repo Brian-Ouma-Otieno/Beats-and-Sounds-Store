@@ -111,6 +111,7 @@ if(isset($_POST['signup'])){
 
 ?>
 
+<h1 class="h3 margin">SignUp</h1>
 
 <div class="pos-middle">
     <div class="form-container">

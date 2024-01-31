@@ -73,6 +73,7 @@
 
 
 <!-- Admin login form -->
+<h1 class="h3">Login</h1>
 <hr class="margin">
 <div class="pos-middle">
     <div class="form-container">

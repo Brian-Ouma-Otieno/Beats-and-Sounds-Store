@@ -89,6 +89,7 @@ include '../Includes/navbar.php';
 ?>
 
 <!-- login form -->
+<h1 class="h3 margin">Login</h1>
 <div class="pos-middle">
     <div class="form-container">
         <form action="login.php" method="POST" class="form1" id="log_form">

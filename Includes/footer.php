@@ -107,6 +107,54 @@
         }); 
     }
 
+    // Get the check out btn
+    const checkOut = document.getElementById("checkOut");
+
+    // Get the <span> element that closes the check out modal
+    const modalClose = document.getElementById("modalClose");
+
+    // Get the modal
+    const cartModal = document.getElementById("cartModal");
+
+    // When the user clicks the button, open the modal 
+    checkOut.addEventListener('click', () => {
+        cartModal.style.display = "block"; 
+        cartModal.style.display = 'flex';  
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    modalClose.addEventListener('click', () => {
+        cartModal.style.display = "none";
+    });
+
+    // // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == cartModal) {
+            cartModal.style.display = "none";
+        }
+    }
+
+    // check out process
+    $(document).ready(function(){           
+        $("#processOrder").submit(function(event){
+            event.preventDefault();               
+            const chkUname = $("#checkOutusername").val();
+            const chkEmail = $("#checkOutmail").val();
+            const chkNum = $("#checkOutnum").val();
+            const chkPin = $("#checkOutpin").val();
+            const chkOutbtn = $("#checkOutbtn").val();
+            $(".chkMessage").load("/Beats and sounds store/Cart/processOrder.php", {
+                chkUname: chkUname,
+                chkEmail: chkEmail,
+                chkNum: chkNum,
+                chkPin: chkPin,
+                chkOutbtn: chkOutbtn                    
+            });              
+        });
+    });
+
+
+
     
     // function del(id) {
     //     var del = id;
