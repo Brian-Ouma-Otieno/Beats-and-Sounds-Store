@@ -1,20 +1,20 @@
 <footer class="margin" id="footer" style="margin-top:50px;text-align:center;">&copy; Copyright 2022 - <?php echo date("Y");?> Beats and Sounds Store</footer>
 
-<!-- <div class="margin audio-control-container genre-container-s-details">
+<div class="margin audio-control-container genre-container-s-details">
     <div class="audio-controls pos-middle">        
         <div class="s-controls">
             <button title="play" id="playBtn"><i class="fas fa-play"></i></button>
             <button title="stop" id="stopBtn"><i class="fas fa-stop"></i></button>
             <button title="mute" id="volumeBtn"><i class="fas fa-volume-up"></i></button>
-        </div>  -->
+        </div> 
         <!-- <div class="s-countbar">
             
         </div> -->
-        <div id="waveform"></div>
-       <!--  <span class="close" style="color: white;" onclick="login.style.display = 'none' "> &#10006; </span> -->
-    <!-- </div>
-</div> -->
-<!-- <div id="waveform"></div> -->
+        <!-- <div id="waveform"></div> -->
+        <span class="close" style="color: white;" onclick="login.style.display = 'none' "> &#10006; </span>
+    </div>
+</div>
+<div id="waveform"></div>
 
 <script src="/Beats and sounds store/Js/script.js"></script>
 <script>
@@ -23,13 +23,14 @@
     const stopBtn = document.getElementById('stopBtn');
     const volumeBtn = document.getElementById('volumeBtn');
 
-    const wavesufer = WaveSufer.create({
-        container:'#waveform',
-        waveColor:'#fff',
-        progressColor:'#e74c3c'
-    });
 
-    wavesufer.load('/Beats and sounds store/Audio/Kalimba.mp3');
+    const wavesurfer = WaveSurfer.create({
+        container: '#waveform',
+        waveColor: '#4F4A85',
+        progressColor: '#383351',
+        url: '/Beats and sounds store/Audio/ipepete.mp3',
+    }) 
+
 
     // playBtn.onclick = function(){
     //     wavesufer.playPause();
@@ -40,7 +41,7 @@
     //     }
     // }
     playBtn.addEventListener('click', () => {
-        wavesufer.playPause();
+        wavesurfer.playPause();
         if (playBtn.src.includes('<button title="play" id="playBtn"><i class="fas fa-play"></i></button>')) {
             playBtn.src = '<button title="pause" id="playBtn"><i class="fas fa-pause"></i></button>';
         } else {
@@ -49,11 +50,11 @@
     });  
 
     stopBtn.onclick = function(){
-        wavesufer.stop();
+        wavesurfer.stop();
         playBtn.src = '<button title="play" id="playBtn"><i class="fas fa-play"></i></button>';
     }
     volumeBtn.onclick = function(){
-        wavesufer.toggleMute();
+        wavesurfer.toggleMute();
         if (volumeBtn.src.includes('<button title="play" id="playBtn"><i class="fas fa-volume-up"></i></button>')) {
             volumeBtn.src = '<button title="pause" id="playBtn"><i class="fas fa-volume-down"></i></button>';
         } else {
@@ -61,16 +62,11 @@
         }
     }
 
-    wavesufer.on('finish', function(){
+    wavesurfer.on('finish', function(){
         playBtn.src = '<button title="play" id="playBtn"><i class="fas fa-play"></i></button>';
         wavesufer.stop();
     });
 
-
-    // const ctx = new (window.AudioContext || window.webkitAudioContext )();
-    // const osc = ctx.createOscillator();
-    // osc.connect(ctx.destination);
-    // console.log(ctx);
 </script>
 
 

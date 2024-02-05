@@ -14,7 +14,7 @@
     <script src="/Beats and sounds store/Jquery/jquery-3.6.0.min (1).js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
     <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://unpkg.com/wavesurfer.js@7"></script> -->
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
     <!-- <script src="/Beats and sounds store/katspaugh-wavesurfer.js-edccdc3/src/wavesurfer.js"></script> -->
     <style>
         /* packs section */
