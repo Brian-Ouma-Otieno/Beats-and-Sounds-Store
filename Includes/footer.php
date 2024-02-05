@@ -19,11 +19,11 @@
 <script src="/Beats and sounds store/Js/script.js"></script>
 <script>
 
-    var playBtn = document.getElementById('playBtn');
-    var stopBtn = document.getElementById('stopBtn');
-    var volumeBtn = document.getElementById('volumeBtn');
+    const playBtn = document.getElementById('playBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const volumeBtn = document.getElementById('volumeBtn');
 
-    var wavesufer = WaveSufer.create({
+    const wavesufer = WaveSufer.create({
         container:'#waveform',
         waveColor:'#fff',
         progressColor:'#e74c3c'
@@ -31,14 +31,23 @@
 
     wavesufer.load('/Beats and sounds store/Audio/Kalimba.mp3');
 
-    playBtn.onclick = function(){
+    // playBtn.onclick = function(){
+    //     wavesufer.playPause();
+    //     if (playBtn.src.includes('<button title="play" id="playBtn"><i class="fas fa-play"></i></button>')) {
+    //         playBtn.src = '<button title="pause" id="playBtn"><i class="fas fa-pause"></i></button>';
+    //     } else {
+    //         playBtn.src = '<button title="play" id="playBtn"><i class="fas fa-play"></i></button>';
+    //     }
+    // }
+    playBtn.addEventListener('click', () => {
         wavesufer.playPause();
         if (playBtn.src.includes('<button title="play" id="playBtn"><i class="fas fa-play"></i></button>')) {
             playBtn.src = '<button title="pause" id="playBtn"><i class="fas fa-pause"></i></button>';
         } else {
             playBtn.src = '<button title="play" id="playBtn"><i class="fas fa-play"></i></button>';
         }
-    }
+    });  
+
     stopBtn.onclick = function(){
         wavesufer.stop();
         playBtn.src = '<button title="play" id="playBtn"><i class="fas fa-play"></i></button>';
@@ -57,9 +66,11 @@
         wavesufer.stop();
     });
 
-    function add_to_cart(){
-        
-    }
+
+    // const ctx = new (window.AudioContext || window.webkitAudioContext )();
+    // const osc = ctx.createOscillator();
+    // osc.connect(ctx.destination);
+    // console.log(ctx);
 </script>
 
 
@@ -143,7 +154,7 @@
             const chkNum = $("#checkOutnum").val();
             const chkPin = $("#checkOutpin").val();
             const chkOutbtn = $("#checkOutbtn").val();
-            $(".chkMessage").load("/Beats and sounds store/Cart/processOrder.php", {
+            $(".chkMessage").load("../Cart/processOrder2.php", {
                 chkUname: chkUname,
                 chkEmail: chkEmail,
                 chkNum: chkNum,

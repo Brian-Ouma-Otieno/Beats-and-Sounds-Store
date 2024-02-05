@@ -4,7 +4,7 @@
 
     if (isset($_POST['chkOutbtn'])) {
         $phone_number = $_POST['chkNum'];
-        echo $phone_number;
+        echo 'hello';
     }
 
 

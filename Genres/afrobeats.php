@@ -154,7 +154,6 @@
 
 
 <?php
-    echo display_errors($_SESSION['success_flash']) ;
 
     include '../Includes/footer.php';
 ?>
