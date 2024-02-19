@@ -14,7 +14,7 @@
         <span class="close" style="color: white;" onclick="login.style.display = 'none' "> &#10006; </span>
     </div>
 </div>
-<div id="waveform"></div>
+<!-- <div id="waveform"></div> -->
 
 <script src="/Beats and sounds store/Js/script.js"></script>
 <script>
@@ -24,13 +24,24 @@
     const volumeBtn = document.getElementById('volumeBtn');
 
 
-    const wavesurfer = WaveSurfer.create({
+    // const wavesurfer = WaveSurfer.create({
+    //     container: '#waveform',
+    //     waveColor: '#4F4A85',
+    //     progressColor: '#383351',
+    //     url: '/Beats and sounds store/Audio/ipepete.mp3',
+    // }) 
+
+
+    function audioControl(audioId) {
+        const audio = audioId;
+
+        const wavesurfer = WaveSurfer.create({
         container: '#waveform',
         waveColor: '#4F4A85',
         progressColor: '#383351',
-        url: '/Beats and sounds store/Audio/ipepete.mp3',
+        url: '/Beats and sounds store/Audio/',
     }) 
-
+    }
 
     // playBtn.onclick = function(){
     //     wavesufer.playPause();
@@ -40,6 +51,19 @@
     //         playBtn.src = '<button title="play" id="playBtn"><i class="fas fa-play"></i></button>';
     //     }
     // }
+
+    const afroPlay = document.getElementById('afroPlay');
+
+    afroPlay.addEventListener('click', () => {
+        wavesurfer.playPause();
+        
+        // if (playBtn.src.includes('<button title="play" id="playBtn"><i class="fas fa-play"></i></button>')) {
+        //     playBtn.src = '<button title="pause" id="playBtn"><i class="fas fa-pause"></i></button>';
+        // } else {
+        //     playBtn.src = '<button title="play" id="playBtn"><i class="fas fa-play"></i></button>';
+        // }
+    });  
+
     playBtn.addEventListener('click', () => {
         wavesurfer.playPause();
         if (playBtn.src.includes('<button title="play" id="playBtn"><i class="fas fa-play"></i></button>')) {
@@ -150,7 +174,7 @@
             const chkNum = $("#checkOutnum").val();
             const chkPin = $("#checkOutpin").val();
             const chkOutbtn = $("#checkOutbtn").val();
-            $(".chkMessage").load("../Cart/processOrder2.php", {
+            $(".chkMessage").load("../Cart/processOrder.php", {
                 chkUname: chkUname,
                 chkEmail: chkEmail,
                 chkNum: chkNum,

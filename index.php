@@ -98,7 +98,7 @@
 
 
 <?php
-    include 'Includes/samples.php';
+    // include 'Includes/samples.php';
     include 'Includes/footer.php';
 ?>
 

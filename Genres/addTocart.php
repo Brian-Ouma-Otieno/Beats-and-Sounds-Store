@@ -3,10 +3,9 @@
     require_once '../DB/beats&sounds_db.php'; 
     include '../Functions/functions.php';
 
-
-    if (isset($_SESSION['reg_user'])) {
-        if (isset($_POST['Bid'])) {
-
+  
+    if (isset($_POST['Bid'])) {
+        if (isset($_SESSION['reg_user'])) {
             $reg_userCartid = $_SESSION['reg_user'];
             $beat_id = $_POST['Bid'];
             $featured = 1;
@@ -45,7 +44,7 @@
                                 
         } 
     }else {
-        header("Location: /Beats and sounds store/users/login.php");
+        header("Location: /Beats and sounds store");
     }
 
 
