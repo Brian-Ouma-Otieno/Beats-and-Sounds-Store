@@ -6,7 +6,7 @@
     if(!is_logged_in()){
         login_error_redirect();
     }
-    include 'Includes/head.php';
+    include 'includes/head.php';
     include 'Includes/navbar.php';
    
 

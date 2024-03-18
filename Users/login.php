@@ -1,3 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beats and Sounds Store</title>
+    <link rel="stylesheet" href="/Beats and sounds store/css/main.css">
+    <link rel="stylesheet" href="/Beats and sounds store/fontawesome-free-6.1.1-web\css\all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="/Beats and sounds store/Jquery/jquery-3.6.0.min (1).js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
+   
+</head>
+<body>
+
 <?php
 
 require_once '../DB/beats&sounds_db.php';
@@ -5,88 +23,8 @@ require_once '../Functions/functions.php';
 // include '../Includes/head.php';
 // include '../Includes/navbar.php';
 
-// if (isset($_POST['login'])) {
-
-//     $email = sanitize_input($_POST['log_mail']);
-//     $password = sanitize_input($_POST['log_password']);
-
-//     $error = array();
-//     $success = true;
-
-//     if(empty($email) || empty($password)){
-//         $error[] = 'You must provide email and Password.';
-//         $success = false;
-
-//     } 
-
-//     // validate email
-//     if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-//         $error[] = 'You must enter a valid email.';
-//         $success = false;
-//     }
-    
-//     if (!empty($password)) {
-//         if (!preg_match("/^[A-Za-z0-9\s]*$/",$password)) {
-            
-//             $error[] = 'Please provide the correct password.';
-//             $success = false;
-//         }
-//     }
-
-//     // check if email exist in database
-//     $user_query = mysqli_query($db_connect,"SELECT * FROM regular_users WHERE email = '$email'");
-//     $user_fetch = mysqli_fetch_assoc($user_query);
-//     $userCount = mysqli_num_rows($user_query);
-//     if($userCount < 1){
-//         $error[] = 'That email doesn\'t exist in our database';
-//         $success = false;
-//     }
-
-//     if(!password_verify($password, @$user_fetch['password'])){
-//         $error[] = 'The password does not match our records.Please try again';
-//         $success = false;
-//     }
-
-//     // check for errors
-//     if($success == false){
-//         echo display_errors($error[0]);
-
-//     }else{
-
-//         $reg_user_id = $user_fetch['id'];
-
-//         $checkIfuserActive = "SELECT * FROM regular_users WHERE id = '$reg_user_id' AND reg_userStatus = 1";
-//         $checkIfuserActiveQuery = mysqli_query($db_connect,$checkIfuserActive);
-//         $checkIfuserActiveNumRows = mysqli_num_rows($checkIfuserActiveQuery);
-
-//         // check if user is already active
-//         if ($checkIfuserActiveNumRows > 0) {
-//             $userExist = 'User Already Active';
-//             echo display_errors($userExist);
-//         } else {
-//             // log user in       
-//             reg_user_login($reg_user_id);
-//             header("Location: /Beats and sounds store");
-//         }
-               
-//     }
-    
-
-// }else {
-//     // header("Location: /Beats and sounds store");
-// }
-
-include '../Includes/head.php';
-include '../Includes/navbar.php';
-
 ?>
 
-
-<?php
-    if (isset($_SESSION['reg_user'])) {
-        echo '<a class="pos-middle tomato" title="home" href="/Beats and sounds store/">Go To Home Page</i></a>';
-    } else { 
-?>
 
 <!-- login form -->
 <h1 class="h3 margin">Login</h1>
@@ -116,15 +54,10 @@ include '../Includes/navbar.php';
                     validateLogin($email,$password);
                 }
             ?>
-            <p>Forgot password?</p><a href="/Beats and sounds store/users/reset-password.php" class="links">Click here</a>
+            <!-- <p>Forgot password?</p><a href="/Beats and sounds store/users/reset-password.php" class="links">Click here</a> -->
         </form>
     </div>
 </div>
-
-<?php
-    }   
-?>
-
 
 
 

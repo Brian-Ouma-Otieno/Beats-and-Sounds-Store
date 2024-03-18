@@ -15,6 +15,9 @@ if (!$db_connect) {
 // start session
 session_start();
 
+// setting the default timezone
+date_default_timezone_set("Africa/Nairobi");
+
 // require_once '../Functions/functions.php';
 
 if(isset($_SESSION['AEuser'])){

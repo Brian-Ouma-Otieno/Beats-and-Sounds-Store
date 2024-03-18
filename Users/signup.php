@@ -1,113 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beats and Sounds Store</title>
+    <link rel="stylesheet" href="/Beats and sounds store/css/main.css">
+    <link rel="stylesheet" href="/Beats and sounds store/fontawesome-free-6.1.1-web\css\all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="/Beats and sounds store/Jquery/jquery-3.6.0.min (1).js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
+   
+</head>
+<body>
+
+
 <?php 
 require_once '../DB/beats&sounds_db.php';
 require_once '../Functions/functions.php';
-include '../Includes/head.php';
-include '../Includes/navbar.php';
-
-
-if(isset($_POST['signup'])){
-
-    $error = array();
-    $success = true;
-
-    // recieving user's inputs
-    if(isset($_POST['firstname'])){
-        $firstname = Sanitize_input($_POST['firstname']); 
-    }  
-    if(isset($_POST['email_1'])){
-        $email = Sanitize_input($_POST['email_1']); 
-    }  
-    if(isset($_POST['password1'])){
-        $password = Sanitize_input($_POST['password1']); 
-    }  
-    if(isset($_POST['password2'])){
-        $password2 = Sanitize_input($_POST['password2']); 
-    } 
-
-    // checking if all the inputs are filled
-    if(empty($firstname) || empty($email) || empty($password) || empty($password2)){
-        $error[] = 'Fill in all the Fields.';
-        $success = false;
-    }
-
-    // validate username
-    if(!empty($firstname)) {
-        if (!preg_match("/^[A-Za-z0-9\s]*$/",$firstname)) {
-            $error[] = 'Please provide the correct name.';
-            $success = false;
-        }
-    }
-
-    // validate email
-    if(isset($email)){
-        if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-            $error[] = 'Provide a valid email.';
-            $success = false;
-        }
-    }
-
-    // validate password
-    if (!empty($password)) {
-        // check password length
-        $passwordLength = strlen($password);
-        if ($passwordLength < 8) {
-            
-            $error[] = 'Your password is to short.';
-            $success = false;
-        }
-
-        // check regular expression
-        if (!preg_match("/^[A-Za-z0-9]*$/",$password)) {
-            
-            $error[] = 'Provide the correct password.';
-            $success = false;
-        }
-    }
-
-    // check if the two passwords match
-    if ($password !== $password2) {
-
-        $error[] = 'Your passwords do not match.';
-        $success = false;        
-    }
-
-    // checking if email already exist in database
-    if(isset($email)){
-        $reg_users_check = "SELECT * FROM regular_users WHERE email = '$email'";
-        $reg_users_query = mysqli_query($db_connect,  $reg_users_check);
-        $reg_users_num_row = mysqli_num_rows($reg_users_query);
-
-        if ($reg_users_num_row > 0) {
-            $error[] = 'Sorry, the email already exist !';
-            $success = false;
-        }
-    }
-    
-
-    if ($success == false) {
-        echo display_errors($error[0]);
-        
-
-    }else{
-
-        // insert data to database
-        $reg_users_sql_insert = "INSERT INTO regular_users (username, email, password) VALUES(?, ?, ?);";
-        $stmt = mysqli_stmt_init($db_connect);
-        if (!mysqli_stmt_prepare($stmt, $reg_users_sql_insert)) {
-            echo 'There was an error, please try again.';
-        } else {
-            // harshing password
-            $reg_users_password_harsh = password_hash($password,PASSWORD_DEFAULT);
-
-            mysqli_stmt_bind_param($stmt, "sss", $firstname, $email, $reg_users_password_harsh);
-            mysqli_stmt_execute($stmt);                
-            header('Location: ../index.php?welcome=ok');
-            // echo 'Inserted';
-        }
-    }
-    
-    
-}
+// include '../Includes/head.php';
+// include '../Includes/navbar.php';
 
 ?>
 
@@ -146,6 +60,25 @@ if(isset($_POST['signup'])){
                 <p id="number" class="invalid">A <b>number</b></p>
                 <p id="length" class="invalid">Minimum <b>8 characters</b></p>
             </div>
+            <?php  
+                if (isset($_POST['signup'])) {
+                    
+                    // recieving user's inputs
+                    if(isset($_POST['firstname'])){
+                        $firstname = Sanitize_input($_POST['firstname']); 
+                    }  
+                    if(isset($_POST['email_1'])){
+                        $email = Sanitize_input($_POST['email_1']); 
+                    }  
+                    if(isset($_POST['password1'])){
+                        $password = Sanitize_input($_POST['password1']); 
+                    }  
+                    if(isset($_POST['password2'])){
+                        $password2 = Sanitize_input($_POST['password2']); 
+                    } 
+                    validateSignup($firstname, $email, $password,$password2);                    
+                }
+            ?>
         </form>
         
     </div>

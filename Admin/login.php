@@ -8,72 +8,72 @@
     // $sql_gnr_query = mysqli_query($db_connect, $sql_gnr);
    
 
-    if (isset($_POST['log'])) {
+//     if (isset($_POST['log'])) {
 
 
-        $email = sanitize_input($_POST['email']);
-        $password = sanitize_input($_POST['password']);
+//         $email = sanitize_input($_POST['email']);
+//         $password = sanitize_input($_POST['password']);
 
-        $error = array();
-        $success = true;
+//         $error = array();
+//         $success = true;
 
-        if(empty($email) || empty($password)){
-            $error[] = 'You must provide email and Password.';
-            $success = false;
-            // exit();
-        } 
+//         if(empty($email) || empty($password)){
+//             $error[] = 'You must provide email and Password.';
+//             $success = false;
+//             // exit();
+//         } 
 
-        // validate email
-        if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-            $error[] = 'You must enter a valid email.';
-            $success = false;
-        }
+//         // validate email
+//         if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+//             $error[] = 'You must enter a valid email.';
+//             $success = false;
+//         }
         
-        if (!empty($password)) {
-            if (!preg_match("/^[A-Za-z0-9\s]*$/",$password)) {
+//         if (!empty($password)) {
+//             if (!preg_match("/^[A-Za-z0-9\s]*$/",$password)) {
                 
-                $error[] = 'Please provide the correct password.';
-                $success = false;
-            }
-            // exit();
-        }
+//                 $error[] = 'Please provide the correct password.';
+//                 $success = false;
+//             }
+//             // exit();
+//         }
 
-        // check if email exist in database
-        $user_query = mysqli_query($db_connect,"SELECT * FROM admin_editor_users WHERE email = '$email'");
-        $user_fetch = mysqli_fetch_assoc($user_query);
-        $userCount = mysqli_num_rows($user_query);
-        if($userCount < 1){
-            $error[] = 'That email doesn\'t exist in our database';
-            $success = false;
-        }
+//         // check if email exist in database
+//         $user_query = mysqli_query($db_connect,"SELECT * FROM admin_editor_users WHERE email = '$email'");
+//         $user_fetch = mysqli_fetch_assoc($user_query);
+//         $userCount = mysqli_num_rows($user_query);
+//         if($userCount < 1){
+//             $error[] = 'That email doesn\'t exist in our database';
+//             $success = false;
+//         }
 
-        // if(!password_verify($password, @$user_fetch['password'])){
-        //     $error[] = 'The password does not match our records.Please try again';
-        //     $success = false;
-        // }
-        if($password !== @$user_fetch['password']){
-            $error[] = 'The password does not match our records.Please try again';
-            $success = false;
-        }
+//         // if(!password_verify($password, @$user_fetch['password'])){
+//         //     $error[] = 'The password does not match our records.Please try again';
+//         //     $success = false;
+//         // }
+//         if($password !== @$user_fetch['password']){
+//             $error[] = 'The password does not match our records.Please try again';
+//             $success = false;
+//         }
 
-        // check for errors
-        if($success == false){
-            echo display_errors($error[0]);
-        }else{
-            // log user in
-            $admin_editor_id = $user_fetch['id'];
-            login($admin_editor_id);
-        }
+//         // check for errors
+//         if($success == false){
+//             echo display_errors($error[0]);
+//         }else{
+//             // log user in
+//             $admin_editor_id = $user_fetch['id'];
+//             login($admin_editor_id);
+//         }
         
 
-    }
+//     }
 
 
-?>
+// ?>
 
 
 <!-- Admin login form -->
-<h1 class="h3">Login</h1>
+<h1 class="h3 margin">Login</h1>
 <hr class="margin">
 <div class="pos-middle">
     <div class="form-container">
@@ -86,6 +86,67 @@
             </div>
             <button type="submit" id="log" name="log">Login</button>
             <p class="text-right"><a href="/Beats and sounds store/" alt="home" class="links">Visit Site</a></p>
+            <?php    
+                if (isset($_POST['log'])) {
+
+
+                    $email = sanitize_input($_POST['email']);
+                    $password = sanitize_input($_POST['password']);
+
+                    $error = array();
+                    $success = true;
+
+                    if(empty($email) || empty($password)){
+                        $error[] = 'You must provide email and Password.';
+                        $success = false;
+                        // exit();
+                    } 
+
+                    // validate email
+                    if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+                        $error[] = 'You must enter a valid email.';
+                        $success = false;
+                    }
+
+                    if (!empty($password)) {
+                        if (!preg_match("/^[A-Za-z0-9\s]*$/",$password)) {
+                            
+                            $error[] = 'Please provide the correct password.';
+                            $success = false;
+                        }
+                        // exit();
+                    }
+
+                    // check if email exist in database
+                    $user_query = mysqli_query($db_connect,"SELECT * FROM admin_editor_users WHERE email = '$email'");
+                    $user_fetch = mysqli_fetch_assoc($user_query);
+                    $userCount = mysqli_num_rows($user_query);
+                    if($userCount < 1){
+                        $error[] = 'That email doesn\'t exist in our database';
+                        $success = false;
+                    }
+
+                    // if(!password_verify($password, @$user_fetch['password'])){
+                    //     $error[] = 'The password does not match our records.Please try again';
+                    //     $success = false;
+                    // }
+                    if($password !== @$user_fetch['password']){
+                        $error[] = 'The email and password does not match.';
+                        $success = false;
+                    }
+
+                    // check for errors
+                    if($success == false){
+                        echo display_errors($error[0]);
+                    }else{
+                        // log user in
+                        $admin_editor_id = $user_fetch['id'];
+                        login($admin_editor_id);
+                    }
+
+                }
+
+            ?>
         </form>
     </div>
 </div>

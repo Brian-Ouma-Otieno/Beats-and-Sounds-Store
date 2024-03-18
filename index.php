@@ -75,15 +75,15 @@
         <h4 class="h4">TRAP</h4>
         <div class="trap-item"> 
             <?php  while($trap_fetch = mysqli_fetch_assoc($trap_query)):  ?>
-            <div class="trap-child">
-                <div class="trap-img pos-middle item-img" style="background-image: url('<?= $trap_fetch['image']; ?>'); background-size: cover;">
-                    <button title="play"><i class="fas fa-play"></i></button>
-                </div>
-                <div class="trap-details carousel-details">
-                    <p><a href="/Beats and sounds store/genres/trap.php?id=<?= $trap_fetch['id']; ?>"><?= $trap_fetch['beat_name']; ?></a></p>
-                    <p>by:<?= $trap_fetch['author']; ?></p>
-                </div>
-            </div> 
+                <div class="trap-child">
+                    <div class="trap-img pos-middle item-img" style="background-image: url('<?= $trap_fetch['image']; ?>'); background-size: cover;">
+                        <button title="play"><i class="fas fa-play"></i></button>
+                    </div>
+                    <div class="trap-details carousel-details">
+                        <p><a href="/Beats and sounds store/genres/trap.php?id=<?= $trap_fetch['id']; ?>"><?= $trap_fetch['beat_name']; ?></a></p>
+                        <p>by:<?= $trap_fetch['author']; ?></p>
+                    </div>
+                </div> 
             <?php endwhile; ?>         
         </div>
 

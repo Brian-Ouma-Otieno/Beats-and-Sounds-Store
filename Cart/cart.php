@@ -2,12 +2,11 @@
     require_once '../DB/beats&sounds_db.php';                               
     include '../Includes/head.php';
     include '../Includes/navbar.php';
+    include '../Includes/disp_img.php';
     include '../Functions/functions.php';
     
 ?>
 
-<!-- display and search section -->
-<div class="disp-img margin pos-middle" style="height:500px; background-image: url('/Beats and sounds store/Images/images/pexels-hendrik-b-744318.jpg'); background-size: cover;">           
                         
 </div>
 
@@ -130,7 +129,7 @@
 
 <!-- check out all and delete all btn -->
 <div class="pos-middle">
-    <div class="form-group-child <?=((isset($_SESSION['reg_user']) && $cart_query_num_rows <= 0 || !isset($_SESSION['reg_user']))?'disabled':'');?>">             
+    <div class="form-group-child col-2 <?=((isset($_SESSION['reg_user']) && $cart_query_num_rows <= 0 || !isset($_SESSION['reg_user']))?'disabled':'');?>">             
         <button type="submit"  name="checkOutAll" value="">Check Out All</button>       
     </div>
     <div class="form-group-child col-2 <?=((isset($_SESSION['reg_user']) && $cart_query_num_rows <= 0 || !isset($_SESSION['reg_user']))?'disabled':'');?>">               
@@ -141,7 +140,7 @@
 
 <!-- Table -->
 <div class="pos-middle">
-    <div class="samples margin col-6" style="border:1px solid purpl; background-color: #C0C0C0; width:100; height:500">
+    <div class="samples margin col-6">
         <table id="t01" class="col-12">
             <tr>
                 <th></th>
@@ -160,7 +159,8 @@
             </tr>
             <tr>
                 <td>Grand Total</td>
-                <td colspan='2'>0</td>
+                <td colspan='2'><?=((isset($_SESSION['reg_user']) && $cart_query_num_rows > 0 )? $cartSumFetch['Totalprice']:'0');?></td>
+                <!-- <td colspan='2'>0</td> -->
             </tr>
         </table>
     </div>

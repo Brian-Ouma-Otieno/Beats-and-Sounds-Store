@@ -1,43 +1,46 @@
 <?php
-    require_once '../DB/beats&sounds_db.php';
-    require_once '../Functions/functions.php';
-    
-    // check if user has logged in
-    if(!is_logged_in()){
-        login_error_redirect();
-    }
+  require_once '../DB/beats&sounds_db.php';
+  require_once '../Functions/functions.php';
+  
+  // check if user has logged in
+  if(!is_logged_in()){
+      login_error_redirect();
+  }
 
-    include 'Includes/head.php';
-    include 'Includes/navbar.php';
-    
+  include 'includes/head.php';
+  include 'Includes/navbar.php';
+  
 
-    // $sql_gnr = "SELECT * FROM genre WHERE parent = 0";
-    // $sql_gnr_query = mysqli_query($db_connect, $sql_gnr);
-    // $password = 'paswword';
-    //     $hashed = password_hash($password,PASSWORD_DEFAULT);
-    //     echo $hashed;
-    $userQuery = mysqli_query($db_connect, "SELECT * FROM admin_editor_users ORDER BY username");
+  $userQuery = mysqli_query($db_connect, "SELECT * FROM admin_editor_users ORDER BY username");
 ?>
 
 
-<h2>Users</h2>
+<h2 class="h3 margin">Users</h2>
 
-<?php while($user = mysqli_fetch_assoc($userQuery)) : ?>
-        <tr>     
-          <td>
-            <?php if($user['id'] != $user_data['id'] ) : ?>
-              <a href="users.php?delete=<?=$user['id']; ?>" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove-sign"></span></a>
-            <?php endif; ?>
-          </td>
-          <td><?=$user['username']; ?></td> <br>
-          <td><?=$user['email']; ?></td> <br>
-          <td><?=pretty_date($user['join_date']); ?></td> <br>
-          <td><?=(($user['last_login'] == '0000-00-00 00:00:00')?'Never':pretty_date($user['last_login'])); ?></td> <br>
-          <td><?=$user['permissions']; ?></td>
-        </tr>
-      <?php endwhile; ?>
+<hr class="margin">
 
-
+<div class="pos-middle">
+    <div class="samples margin col-6">
+        <table id="t01" class="col-12">         
+          <tr>
+            <th colspan='2'>USER NAME</th>
+            <th>EMAIL</th>
+            <th colspan='2'>JOIN DATE</th>
+            <th colspan='4'>LAST LOGIN</th>
+            <th colspan='3'>PERMISSION</th>
+          </tr>
+          <?php while($user = mysqli_fetch_assoc($userQuery)) : ?>
+            <tr>
+              <td colspan='2'><?=$user['username']; ?></td> <br>
+              <td><?=$user['email']; ?></td> <br>
+              <td colspan='2'><?=pretty_date($user['join_date']); ?></td> <br>
+              <td colspan='4'><?=(($user['last_login'] == '0000-00-00 00:00:00')?'Never':pretty_date($user['last_login'])); ?></td> <br>
+              <td colspan='3'><?=$user['permissions']; ?></td>
+            </tr>
+          <?php endwhile; ?>
+        </table>
+    </div>
+</div>
 
 
 

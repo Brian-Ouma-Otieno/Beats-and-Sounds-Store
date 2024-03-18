@@ -36,7 +36,6 @@
     function reg_user_login($reg_user_id){
         $_SESSION['reg_user'] = $reg_user_id;
         global $db_connect;
-        date_default_timezone_set("Africa/Nairobi");
         $date = date("Y-m-d H:i:s");
         mysqli_query($db_connect,"UPDATE regular_users SET last_login = '$date' WHERE id = $reg_user_id");
         mysqli_query($db_connect,"UPDATE regular_users SET reg_userStatus = 1 WHERE id = $reg_user_id");
@@ -95,6 +94,11 @@
         $user_query = mysqli_query($db_connect,"SELECT * FROM regular_users WHERE email = '$email'");
         $user_fetch = mysqli_fetch_assoc($user_query);
         $userCount = mysqli_num_rows($user_query);
+        // $reg_user_id = $user_fetch['id'];
+        if (isset($user_fetch['id'])) {
+            $reg_user_id = $user_fetch['id'];                   
+        }
+
         if($userCount < 1){
             $error[] = 'Provide the correct email.';
             $success = false;
@@ -111,8 +115,6 @@
 
         }else{
 
-            $reg_user_id = $user_fetch['id'];
-
             $checkIfuserActive = "SELECT * FROM regular_users WHERE id = '$reg_user_id' AND reg_userStatus = 1";
             $checkIfuserActiveQuery = mysqli_query($db_connect,$checkIfuserActive);
             $checkIfuserActiveNumRows = mysqli_num_rows($checkIfuserActiveQuery);
@@ -121,78 +123,109 @@
             if ($checkIfuserActiveNumRows > 0) {
                 $userExist = 'User Already Active';
                 echo display_errors($userExist);
-                // $error[] = 'User Already Active';
-                // $success = false;
+            
             } else {
                 // log user in       
                 reg_user_login($reg_user_id);
-                // header("Location: /Beats and sounds store");
+                header("Location: /Beats and sounds store");
             }
                 
         }
             
-            // if($success == false){
-            //     echo display_errors($error[0]);
-            // }
-    
-        // return display_errors($error[0]);
     }
 
 
+    // processing signup details
+    function validateSignup($firstname, $email, $password,$password2){
 
+        $error = array();
+        $success = true;
+        global $db_connect;
 
+        // checking if all the inputs are filled
+        if(empty($firstname) || empty($email) || empty($password) || empty($password2)){
+            $error[] = 'Fill in all the Fields.';
+            $success = false;
+        }
 
+        // validate username
+        if(!empty($firstname)) {
+            if (!preg_match("/^[A-Za-z0-9\s]*$/",$firstname)) {
+                $error[] = 'Please provide the correct name.';
+                $success = false;
+            }
+        }
 
+        // validate email
+        if(isset($email)){
+            if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+                $error[] = 'Provide a valid email.';
+                $success = false;
+            }
+        }
 
+        // validate password
+        if (!empty($password)) {
+            // check password length
+            $passwordLength = strlen($password);
+            if ($passwordLength < 8) {
+                
+                $error[] = 'Your password is to short.';
+                $success = false;
+            }
 
+            // check regular expression
+            if (!preg_match("/^[A-Za-z0-9]*$/",$password)) {
+                
+                $error[] = 'Provide the correct password.';
+                $success = false;
+            }
+        }
 
+        // check if the two passwords match
+        if ($password !== $password2) {
 
+            $error[] = 'Your passwords do not match.';
+            $success = false;        
+        }
 
+        // checking if email already exist in database
+        if(isset($email)){
+            $reg_users_check = "SELECT * FROM regular_users WHERE email = '$email'";
+            $reg_users_query = mysqli_query($db_connect,  $reg_users_check);
+            $reg_users_num_row = mysqli_num_rows($reg_users_query);
 
-
-
-
-
-    // form validation funtions
-    // function emptyInputsignup($username,$email,$password,$password2){
-    //     $result = '';
+            if ($reg_users_num_row > 0) {
+                $error[] = 'Sorry, the email already exist !';
+                $success = false;
+            }
+        }
         
-    //     if (empty($username) || empty($email) || empty($password) || empty($password2)) {
+
+        if ($success == false) {
+            echo display_errors($error[0]);
             
-    //         $result = true;
-    //     } else {
-    //         $result = false;
-    //     }
-        
-    //     return $result;
-    // }
 
-    // function username($username){
-    //     $result = '' ;
-        
-    //     if (!preg_match("/^[A-Za-z0-9]*$/",$username)) {
-            
-    //         $result = true;
-    //     } else {
-    //         $result = false;
-    //     }
-        
-    //     return $result;
-    // }
+        }else{
 
-    // function email($email){
-    //     $result = '' ;
-        
-    //     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            
-    //         $result = true;
-    //     } else {
-    //         $result = false;
-    //     }
-        
-    //     return $result;
-    // }
- 
+            // insert data to database
+            $reg_users_sql_insert = "INSERT INTO regular_users (username, email, password) VALUES(?, ?, ?);";
+            $stmt = mysqli_stmt_init($db_connect);
+            if (!mysqli_stmt_prepare($stmt, $reg_users_sql_insert)) {
+                echo 'There was an error, please try again.';
+            } else {
+                // harshing password
+                $reg_users_password_harsh = password_hash($password,PASSWORD_DEFAULT);
+
+                mysqli_stmt_bind_param($stmt, "sss", $firstname, $email, $reg_users_password_harsh);
+                mysqli_stmt_execute($stmt);                
+                header("Location: /Beats and sounds store/Users/login.php");
+            }
+        }
+
+    }
+
+
 
 
 

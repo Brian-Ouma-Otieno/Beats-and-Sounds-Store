@@ -1,19 +1,19 @@
 <footer class="margin" id="footer" style="margin-top:50px;text-align:center;">&copy; Copyright 2022 - <?php echo date("Y");?> Beats and Sounds Store</footer>
 
-<div class="margin audio-control-container genre-container-s-details">
+<!-- <div class="margin audio-control-container genre-container-s-details">
     <div class="audio-controls pos-middle">        
         <div class="s-controls">
             <button title="play" id="playBtn"><i class="fas fa-play"></i></button>
             <button title="stop" id="stopBtn"><i class="fas fa-stop"></i></button>
             <button title="mute" id="volumeBtn"><i class="fas fa-volume-up"></i></button>
-        </div> 
+        </div>  -->
         <!-- <div class="s-countbar">
             
         </div> -->
         <!-- <div id="waveform"></div> -->
-        <span class="close" style="color: white;" onclick="login.style.display = 'none' "> &#10006; </span>
+        <!-- <span class="close" style="color: white;" onclick="login.style.display = 'none' "> &#10006; </span>
     </div>
-</div>
+</div> -->
 <!-- <div id="waveform"></div> -->
 
 <script src="/Beats and sounds store/Js/script.js"></script>
@@ -52,17 +52,18 @@
     //     }
     // }
 
-    const afroPlay = document.getElementById('afroPlay');
+    // const afroPlay = document.getElementById('afroPlay');
 
-    afroPlay.addEventListener('click', () => {
-        wavesurfer.playPause();
+    // afroPlay.addEventListener('click', () => {
+    //     wavesurfer.playPause();
         
-        // if (playBtn.src.includes('<button title="play" id="playBtn"><i class="fas fa-play"></i></button>')) {
-        //     playBtn.src = '<button title="pause" id="playBtn"><i class="fas fa-pause"></i></button>';
-        // } else {
-        //     playBtn.src = '<button title="play" id="playBtn"><i class="fas fa-play"></i></button>';
-        // }
-    });  
+    //     // if (playBtn.src.includes('<button title="play" id="playBtn"><i class="fas fa-play"></i></button>')) {
+    //     //     playBtn.src = '<button title="pause" id="playBtn"><i class="fas fa-pause"></i></button>';
+    //     // } else {
+    //     //     playBtn.src = '<button title="play" id="playBtn"><i class="fas fa-play"></i></button>';
+    //     // }
+    // });  
+
 
     playBtn.addEventListener('click', () => {
         wavesurfer.playPause();

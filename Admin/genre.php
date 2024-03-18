@@ -7,7 +7,7 @@
         login_error_redirect();
     }
 
-    include 'Includes/head.php';
+    include 'includes/head.php';
     include 'Includes/navbar.php';
     // require_once '../Functions/functions.php';
 
@@ -35,7 +35,44 @@
         $sql_delete = "DELETE FROM genre WHERE id = '$delete_id'";
         mysqli_query($db_connect,$sql_delete);
         header('Location:genre.php');
-    }   
+    }  
+    
+ 
+?>
+
+
+<hr class="margin">
+<h3 class="h3 margin">Add Genre</h3>
+<form class="margin pos-middle" action="genre.php <?= ((isset($_GET['ed']))?'?edit='.$edit_id:''); ?>" method="post">
+    <?php 
+        if(isset($_GET['ed'])){
+            $genre_value = $edit_fetch['genre'];
+        }else{
+            if(isset($_POST['add_genre'])){
+                $genre_value = Sanitize_input($_POST['add_genre']);
+            }
+        }
+    ?>
+    
+    <div class="form-group-child col-3">
+        <input type="text" name="<?=((isset($_GET['ed']))?'edit_genre':'add_genre');?>" placeholder="Add Genre" value="<?=((isset($_GET['ed']))?$genre_value:'');?>">        
+    </div> 
+
+  
+    <div class="form-group-child col-2">
+
+        <?php if(isset($_GET['ed'])):?>
+            <!-- <a href="genre.php" class="btn btn-default">Cancel</a> -->
+            <a href="genre.php" class="">Cancel</a>
+        <?php endif;?>
+        
+        <button type="submit"  name="<?=((isset($_GET['ed']))?'ed':'genre_sub');?>" value=""><?=((isset($_GET['ed']))?'Edit':'Add');?> Genre</button>
+        
+    </div>
+    
+</form>
+
+<?php
 
     // adding genre
     if (isset($_POST['genre_sub'])) {
@@ -47,7 +84,6 @@
         if(empty($add_genre)){
             $error[] = 'Fill in the Field.';
             $success = false;
-            // exit();
         } 
         
         if (!empty($add_genre)) {
@@ -56,7 +92,6 @@
                 $error[] = 'Please provide the correct Genre.';
                 $success = false;
             }
-            // exit();
         }
 
         if ($success == false) {
@@ -121,42 +156,10 @@
 ?>
 
 
-<hr class="margin">
-<h3 class="h3 margin">Add Genre</h3>
-<form class="margin pos-middle" action="genre.php <?= ((isset($_GET['ed']))?'?edit='.$edit_id:''); ?>" method="post">
-    <?php 
-        if(isset($_GET['ed'])){
-            $genre_value = $edit_fetch['genre'];
-        }else{
-            if(isset($_POST['add_genre'])){
-                $genre_value = Sanitize_input($_POST['add_genre']);
-            }
-        }
-    ?>
-    
-    <div class="form-group-child col-3">
-        <input type="text" name="<?=((isset($_GET['ed']))?'edit_genre':'add_genre');?>" placeholder="Add Genre" value="<?=((isset($_GET['ed']))?$genre_value:'');?>">        
-    </div> 
-
-  
-    <div class="form-group-child col-2">
-
-        <?php if(isset($_GET['ed'])):?>
-            <!-- <a href="genre.php" class="btn btn-default">Cancel</a> -->
-            <a href="genre.php" class="">Cancel</a>
-        <?php endif;?>
-        
-        <button type="submit"  name="<?=((isset($_GET['ed']))?'ed':'genre_sub');?>" value=""><?=((isset($_GET['ed']))?'Edit':'Add');?> Genre</button>
-        
-    </div>
-    
-</form>
-
-
 
 
 <div class="pos-middle">
-    <div class="samples margin col-6" style="border:1px solid purpl; background-color: #C0C0C0; width:100; height:500">
+    <div class="samples margin col-6">
         <table id="t01" class="col-12">
             
             <tr>

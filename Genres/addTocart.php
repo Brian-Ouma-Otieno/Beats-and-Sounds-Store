@@ -27,21 +27,12 @@
             mysqli_stmt_bind_param($stmt, "isssssssis", $beat_id, $beatSelectF['genre'], $beatSelectF['beat_name'], $beatSelectF['author'], $beatSelectF['image'], $beatSelectF['price'], $beatSelectF['audio'],
             $cart_expireDate, $reg_userCartid, $Code);
             mysqli_stmt_execute($stmt);   
-            // $cart_id = $db_connect->insert_id;
-            // setcookie($cookie_name, $cart_id, time() + (5), "/");             
-            }
 
-            // if(isset($_GET['featured'])){
-            //     $Displayid = (int)$_GET['id'];
-            //     $featured = (int)$_GET['featured'];
-                $featuredSql = "UPDATE beats SET featured = '$featured' WHERE id = '$beat_id'";
-                $beatRegSql = "UPDATE beats SET reg_userCartid = '$reg_userCartid' WHERE id = '$beat_id'";
-                // $featuredSql = "UPDATE beats SET featured = '$featured', reg_userCartid = '$reg_userCartid' WHERE id = $beat_id AND reg_userCartid = $_SESSION[reg_user]";
-                mysqli_query($db_connect,$featuredSql);
-                mysqli_query($db_connect,$beatRegSql);
-                // header('Location: products.php');
-            // }   
-                                
+            }
+            $featuredSql = "UPDATE beats SET featured = '$featured' WHERE id = '$beat_id'";
+            $beatRegSql = "UPDATE beats SET reg_userCartid = '$reg_userCartid' WHERE id = '$beat_id'";
+            mysqli_query($db_connect,$featuredSql);
+            mysqli_query($db_connect,$beatRegSql);        
         } 
     }else {
         header("Location: /Beats and sounds store");

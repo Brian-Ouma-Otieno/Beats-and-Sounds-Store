@@ -318,6 +318,12 @@ input[type=search]{
   background: #f1f1f1;
 }
 
+.disp-img {	
+    height:500px;
+    background-image: url('/Beats and sounds store/Images/images/pexels-hendrik-b-744318.jpg'); 
+    background-size: cover;
+}
+
 .disp-img button{	
   border: none;
   float: left;
@@ -352,9 +358,7 @@ hr{
 
 /* recent releases/carousel section */
 .carousel-container{
-    /* width:100px; */
-    /* width:100%; */
-    height:200px;
+    /* height:200px; */
     margin-top: 5px;
     position: relative;
 }
@@ -362,8 +366,6 @@ hr{
 .carousel-row-track{
     overflow: hidden;  
     background-color: rgb(255, 233, 237);
-    /* padding-top: 5px; */
-    /* padding-bottom: 5px; */
     padding: 0 0 5px 0;
 }
 
@@ -385,9 +387,6 @@ hr{
     display: flex;
     flex-flow: column;
     height:200px;
-    /* box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3); */
-    /* box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1); */
-    /* width:100px; */
 }
 
 .carousel-container .carousel-track .carousel-item .carousel-item-child .carousel-img{
@@ -420,7 +419,6 @@ hr{
     border: none;
     border-radius: 15%;
     text-align: center;
-    /* text-decoration: none; */
     background: #8e44ad;
     color: #f1f1f1;
     cursor: pointer;
@@ -740,13 +738,13 @@ td a:hover{
 }
 
 /* Countdown Timer */
-.countdown-timer {
+/* .countdown-timer {
     position: absolute;
     bottom: 0px;
     right: 5%;
     color: #2196F3;
     display: inline-flex;
-}
+} */
 
 
 /* cart section */
@@ -936,31 +934,18 @@ td a:hover{
     /* nav section */
     nav{
         padding: 5px; 
-        background-color: black; 
     }
 
     nav button{
         padding: 5px;
-        border: none;   
-        cursor: pointer;
-        color: rgb(255, 255, 255);
-        background-color: rgba(21, 18, 18, 0.999);
-        font-size:small;
-        opacity: 0.6;
     }
     
     nav a{
         padding: 5px;
-        color: rgb(255, 255, 255);
-        background-color: rgba(21, 18, 18, 0.999);
-        font-size: small;
-        opacity: 0.6;
-        text-decoration: none;
-        color: #fff;
     }
 
     /* display and search section */
-    input[type=search]{
+    /* input[type=search]{
         
         outline: none;
         border: none;
@@ -969,9 +954,9 @@ td a:hover{
         float: left;
         width: 80%;
         background: #f1f1f1;
-    }
+    } */
     
-    .disp-img button{	
+    /* .disp-img button{	
         border: none;
         float: left;
         width: 20%;
@@ -981,11 +966,110 @@ td a:hover{
         font-size: medium;
         border: none;
         cursor: pointer;
-    }
+    } */
 
     .disp-img{
+        height: 200px;
+    }
+
+
+    /* recent releases/carousel section */
+    .carousel-container .carousel-track{
+        height:140px;    
+        padding-left: 600px;
+    } 
+
+    .carousel-container .carousel-track .carousel-item{
+        height:135px;        
+    }
+
+    .carousel-container .carousel-track .carousel-item .carousel-item-child{
+        height:130px;
+    }
+
+    .carousel-container .carousel-track .carousel-item .carousel-item-child .carousel-img button{
+        font-size: 40px;
+    }
+
+    .carousel-btn button{
+        font-size: 10px;
+    }
+
+
+    /* afro and amapiano section */
+    .item-container{
+        width: 120px;
+        height: 120px;
+        margin: 5px;
+    }
+    
+    .item-child{
+        height: 120px;
+        width: 120px;
+    }
+    
+    .item-img{
+        height: 70%;
+        width: 100%;
+    }
+    
+    .item-img button{
+        font-size: 40px;
+    }
+
+
+    /* trap section */
+    .trap-child{
+        width: 110px;
+        height: 250px;
+    }
+
+    .trap-img{
+        height: 35%;
+    }
+
+    .trap-details{
+        padding: 2px;
+    }
+
+
+    /* genre section */
+    .genre-container-s{
         height: 100px;
     }
+    
+    .genre-container-s-pic{
+        width: 150px;
+        height: 50px;
+    }
+    
+    .genre-container-s-details{
+        line-height: 0px;
+        width: 350px;
+        height: 20px;
+        padding: 0px;
+    }
+
+    .genre-container-s p{
+        font-size: 9px;
+    }
+    
+    
+    .genre-container-s-details .s-controls button{
+        font-size: 15px;
+    }
+    
+    .genre-container-s-btn button{
+        padding: 3px;
+        font-size: small;
+    }
+    
+   
+    /* cart section */
+    .cart-container{
+        height: 50px;
+    }
+    
 }
 
 
@@ -1006,6 +1090,15 @@ td a:hover{
 } 
   
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-   /* body {background: pink;} */
+/* @media only screen and (min-width: 1200px) { */
+@media only screen and (min-width: 1445px) {
+
+   body {
+    padding: 0 300px 0 300px;
+    font-size: larger;
+   }
+
+   .genres{
+        margin-left: 310px;
+    }
 }

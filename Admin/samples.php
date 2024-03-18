@@ -6,7 +6,7 @@
     if(!is_logged_in()){
         login_error_redirect();
     }
-    include 'Includes/head.php';
+    include 'includes/head.php';
     include 'Includes/navbar.php';
 
     $sql_gnr = "SELECT * FROM genre WHERE parent = 0";
@@ -14,7 +14,70 @@
 ?>
 
 
-<?php
+<hr class="margin">
+<h3 class="h3 margin">Add Samples</h3>
+<div class="margin form-group-container" >
+    <form class="" action="samples.php" method="post" enctype="multipart/form-data">
+
+    <div class="form-group pos-middle" >
+
+        <div class="margin form-group-child col-3">
+            <label for="gnr">Genre:</label>
+            <select name="gnr" id="">
+                <option value="0"></option>
+                <?php while($sql_gnr_fetch = mysqli_fetch_assoc($sql_gnr_query)) :  ?>
+                    <option value="<?= $sql_gnr_fetch['id']; ?>"><?= $sql_gnr_fetch['genre']; ?></option>
+                <?php endwhile;  ?>
+            </select>
+        </div>
+
+        <div class="margin form-group-child col-3">
+            <label for="beat_title">Samples Title:</label>
+            <input type="text" name="smp_title">
+        </div>
+
+        <div class="margin form-group-child col-3">
+            <label for="beat_author">Author:</label>
+            <input type="text" name="smp_author">
+        </div>
+
+        <div class="margin form-group-child col-3">
+            <label for="beat_img">Samples Photo:</label>
+            <input type="file" name="smp_img" accept=".jpg, .jpeg, .png">
+        </div>
+        
+        <div class="margin form-group-child col-3">
+            <label for="beat_price">Price:</label>
+            <input type="text" name="smp_price">
+        </div>
+        
+        <div class="margin form-group-child col-3">
+            <label for="audio_beat">Samples Audio:</label>
+            <input type="file" name="smp_audio" accept=".wav, .mp3">
+        </div>
+
+        <div class="margin form-group-child col-3">
+            <label for="audio_beat">Instrument:</label>
+            <input type="text" name="smp_instrument">
+        </div>
+
+        <div class="margin form-group-child col-3">
+            <label for="audio_beat">Samples BPM:</label>
+            <input type="text" name="smp_bpm">
+        </div>
+
+        <div class="margin form-group-child col-3">
+            <label for="audio_beat">Samples Key:</label>
+            <input type="text" name="smp_key">
+        </div>
+        
+        <div class="margin form-group-child col-3">
+            <button type="submit" name="smp_sub">Add Samples</button>
+        </div>
+    </div>
+
+    </form>
+    <?php
     if (isset($_POST['smp_sub'])) {
         $genre = sanitize_input($_POST['gnr']);
         $sname = sanitize_input($_POST['smp_title']);
@@ -212,72 +275,6 @@
         
     }
 ?>
-
-
-
-<hr class="margin">
-<h3 class="h3 margin">Add Samples</h3>
-<div class="margin form-group-container" >
-    <form class="" action="samples.php" method="post" enctype="multipart/form-data">
-
-    <div class="form-group pos-middle" >
-
-        <div class="margin form-group-child col-3">
-            <label for="gnr">Genre:</label>
-            <select name="gnr" id="">
-                <option value="0"></option>
-                <?php while($sql_gnr_fetch = mysqli_fetch_assoc($sql_gnr_query)) :  ?>
-                    <option value="<?= $sql_gnr_fetch['id']; ?>"><?= $sql_gnr_fetch['genre']; ?></option>
-                <?php endwhile;  ?>
-            </select>
-        </div>
-
-        <div class="margin form-group-child col-3">
-            <label for="beat_title">Samples Title:</label>
-            <input type="text" name="smp_title">
-        </div>
-
-        <div class="margin form-group-child col-3">
-            <label for="beat_author">Author:</label>
-            <input type="text" name="smp_author">
-        </div>
-
-        <div class="margin form-group-child col-3">
-            <label for="beat_img">Samples Photo:</label>
-            <input type="file" name="smp_img" accept=".jpg, .jpeg, .png">
-        </div>
-        
-        <div class="margin form-group-child col-3">
-            <label for="beat_price">Price:</label>
-            <input type="text" name="smp_price">
-        </div>
-        
-        <div class="margin form-group-child col-3">
-            <label for="audio_beat">Samples Audio:</label>
-            <input type="file" name="smp_audio" accept=".wav, .mp3">
-        </div>
-
-        <div class="margin form-group-child col-3">
-            <label for="audio_beat">Instrument:</label>
-            <input type="text" name="smp_instrument">
-        </div>
-
-        <div class="margin form-group-child col-3">
-            <label for="audio_beat">Samples BPM:</label>
-            <input type="text" name="smp_bpm">
-        </div>
-
-        <div class="margin form-group-child col-3">
-            <label for="audio_beat">Samples Key:</label>
-            <input type="text" name="smp_key">
-        </div>
-        
-        <div class="margin form-group-child col-3">
-            <button type="submit" name="smp_sub">Add Samples</button>
-        </div>
-    </div>
-
-    </form>
 </div>
 
 

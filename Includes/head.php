@@ -5,17 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beats and Sounds Store</title>
-    <!-- <link rel="stylesheet" href="/Beats and sounds store/css/main.css"> -->
-    <!-- <link rel="stylesheet" href="/Beats and sounds store/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="/Beats and sounds store/css/main.css">
-    <!-- <link rel="stylesheet" href="/Beats and sounds store/js/bootstrap.min.js"> -->
-    <!-- <link rel="stylesheet" href="/Beats and sounds store/fontawesome-free-6.1.1-web\css\all.css"> -->
+    <link rel="stylesheet" href="/Beats and sounds store/fontawesome-free-6.1.1-web\css\all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="/Beats and sounds store/Jquery/jquery-3.6.0.min (1).js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
     <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
     <script src="https://unpkg.com/wavesurfer.js@7"></script>
-    <!-- <script src="/Beats and sounds store/katspaugh-wavesurfer.js-edccdc3/src/wavesurfer.js"></script> -->
     <style>
         /* packs section */
         .samp-packs-container{
@@ -75,63 +71,7 @@
             padding: 40px;
         }
         
-
-
     </style>
-    <script>
-    // Signup
-    // $(document).ready(function(){           
-    //     $("#form1").submit(function(event){
-    //         event.preventDefault();
-    //         const username = $("#uname").val();
-    //         const email = $("#mail").val();
-    //         const password = $("#pswd").val();
-    //         const password2 = $("#password2").val();
-    //         const signup = $("#signup-btn").val();
-    //         $(".signup-error-message").load("Users/signup.php", {
-    //             username: username,
-    //             email: email,
-    //             password: password,
-    //             password2: password2,
-    //             signup: signup                    
-    //         });           
-    //     });           
-    // });
 
-    // login
-    // $(document).ready(function(){           
-    //     $("#log_form").submit(function(event){
-    //         event.preventDefault();               
-    //         const email = $("#log-email").val();
-    //         const password = $("#log-pswd").val();
-    //         const login = $("#log-btn").val();
-    //         $(".login-error-message").load("Users/login.php", {
-    //             email: email,
-    //             password: password,
-    //             login: login                    
-    //         });              
-    //     });
-    // });
-    // $(document).ready(function(){
-    //     $("#live_search").keyup(function(){
-
-    //         var input = $(this).val();
-            
-    //         if (input != "") {
-    //             $.ajax({
-    //                 url: "includes/search.inc.php",
-    //                 method: "POST",
-    //                 data: {input:input},
-
-    //                 success: function(data){
-    //                     $("#search_results").html(data);
-    //                 }
-    //             });
-    //         } else {
-    //             $("#search_results").css("display","none");
-    //         }
-    //     });
-    // });
-</script>
 </head>
 <body>
