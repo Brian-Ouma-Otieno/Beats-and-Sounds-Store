@@ -170,7 +170,7 @@
             $passwordLength = strlen($password);
             if ($passwordLength < 8) {
                 
-                $error[] = 'Your password is to short.';
+                $error[] = 'Password should contain atleast 8 characters.';
                 $success = false;
             }
 

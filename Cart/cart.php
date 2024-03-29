@@ -118,7 +118,7 @@
         $sqlPcheckOut = "SELECT * FROM regular_users WHERE id = $_SESSION[reg_user]";
         $PcheckOutQuery = mysqli_query($db_connect,$sqlPcheckOut);
         $PcheckOutFetch = mysqli_fetch_assoc($PcheckOutQuery);
-        date_default_timezone_set("Africa/Nairobi");
+        // date_default_timezone_set("Africa/Nairobi");
         $pinCode = 'BSS_'.date("Ymdhis");
 
         }

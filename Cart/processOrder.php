@@ -2,33 +2,33 @@
     require_once '../DB/beats&sounds_db.php'; 
     include '../Functions/functions.php';
 
-    // if (isset($_POST['chkOutbtn']) && isset($_SESSION['reg_user'])) {
-    //     $phone_number = $_POST['chkNum'];
-    //     $chkUname = $_POST['chkUname'];
-    //     $chkEmail = $_POST['chkEmail'];
-    //     $chkPin = $_POST['chkPin'];
+    if (isset($_POST['chkOutbtn']) && isset($_SESSION['reg_user'])) {
+        $phone_number = $_POST['chkNum'];
+        $chkUname = $_POST['chkUname'];
+        $chkEmail = $_POST['chkEmail'];
+        $chkPin = $_POST['chkPin'];
           
-    //     $error = array();
-    //     $success = true;
+        $error = array();
+        $success = true;
 
-    //     if(empty($phone_number)){
-    //         $error[] = 'Please provide phone number.';
-    //         $success = false;        
-    //     } 
+        if(empty($phone_number)){
+            $error[] = 'Please provide phone number.';
+            $success = false;        
+        } 
 
-        // if (!empty($phone_number)) {
-        //     if (!preg_match("/^[0-9]*$/",$phone_number)) {
+        if (!empty($phone_number)) {
+            if (!preg_match("/^([0-9]{10})*$/",$phone_number)) {
                 
-        //         $error[] = 'Please provide the correct phone number.';
-        //         $success = false;
-        //     }
-        // }
+                $error[] = 'Please provide the correct phone number.';
+                $success = false;
+            }
+        }
 
-        // // check for errors
-        // if($success == false){
-        //     echo display_errors($error[0]);
+        // check for errors
+        if($success == false){
+            echo display_errors($error[0]);
 
-        // }else{
+        }else{
             // Initialize the variables
             $consumer_key = 'FAJXHBudGNPg5DH9d7A7dZ8zHrAP7SEI';
             $consumer_secret = 'hxCAcSokgMACo37i';
@@ -135,13 +135,13 @@
 
                 
 
-    //     }
+        }
                
 
 
-    // }else{
-    //     header('Location: /Beats and sounds store/');
-    // }
+    }else{
+        header('Location: /Beats and sounds store/');
+    }
 
     
 ?>

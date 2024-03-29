@@ -8,10 +8,8 @@
     <link rel="stylesheet" href="/Beats and sounds store/css/main.css">
     <link rel="stylesheet" href="/Beats and sounds store/fontawesome-free-6.1.1-web\css\all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="/Beats and sounds store/Jquery/jquery-3.6.0.min (1).js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
-    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
     <script src="https://unpkg.com/wavesurfer.js@7"></script>
+    <script> window.history.forward(); </script>
    
 </head>
 <body>
@@ -20,8 +18,6 @@
 
 require_once '../DB/beats&sounds_db.php';
 require_once '../Functions/functions.php';
-// include '../Includes/head.php';
-// include '../Includes/navbar.php';
 
 ?>
 
@@ -33,14 +29,14 @@ require_once '../Functions/functions.php';
         <form action="login.php" method="POST" class="form1" id="log_form">
             <div class="form-control">
                 <!-- <label for="">Email</label> -->
-                <input type="email" placeholder="Email" name="log_mail" id="log_email">
+                <input type="email" placeholder="Email" name="log_mail" id="log_email" required>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <!-- <small>Error Message</small> -->
             </div>
             <div class="form-control">
                 <!-- <label for="">Password</label> -->
-                <input type="password" placeholder="Password" name="log_password" id="log_pswd">
+                <input type="password" placeholder="Password" name="log_password" id="log_pswd" required>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <!-- <small>Error Message</small> -->

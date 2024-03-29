@@ -6,19 +6,13 @@
     include 'Includes/recent_releases.php';
 
     // afro beat query
-    // $sql_afro = "SELECT * FROM afro_beat LIMIT 12";
-    $sql_afro = "SELECT * FROM beats WHERE genre = 'afrobeats' AND featured = 0 LIMIT 12";
-    $afro_query = mysqli_query($db_connect,$sql_afro);
-    // $a = mysqli_num_rows($afro_query);
-    // print_r($a);
+    $afro_query = mysqli_query($db_connect,"SELECT * FROM beats WHERE genre = 'afrobeats' AND featured = 0 LIMIT 12");
 
     // amapiano query
-    $sql_amapiano = "SELECT * FROM amapiano";
-    $amapiano_query = mysqli_query($db_connect,$sql_amapiano);
+    $amapiano_query = mysqli_query($db_connect,"SELECT * FROM beats WHERE genre = 'amapiano' AND featured = 0 LIMIT 12");
 
     // trap query
-    $sql_trap = "SELECT * FROM trap";
-    $trap_query = mysqli_query($db_connect,$sql_trap);
+    $trap_query = mysqli_query($db_connect,"SELECT * FROM beats WHERE genre = 'trap' AND featured = 0 LIMIT 8");
     
 ?>
 
@@ -31,7 +25,7 @@
             <div class="item-container">
                 <div class="item-child">
                     <div class="item-img pos-middle" style="background-image: url('<?= $afro_fetch['image']; ?>'); background-size: cover;">
-                        <button title="play"><i class="fas fa-play"></i></button>
+                        <button id="play" title="play"><i class="fas fa-play"></i></button>
                     </div>
                     <div class="carousel-details">
                         <p><a href="/Beats and sounds store/genres/afrobeats.php?id=<?= $afro_fetch['id']; ?>"><?= $afro_fetch['beat_name']; ?></a></p>                         
@@ -88,12 +82,6 @@
         </div>
 
     </div>
-
-    
-    <!-- hash("sha256",$trap_fetch['id']) -->
-
-
-
 
 
 

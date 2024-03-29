@@ -42,14 +42,10 @@
         </div>
         <div class="margin genre-container-s-details">
             <p><?= $afro_fetch['beat_name']; ?> - by: <?= $afro_fetch['author']; ?></p>
-            <!-- <div class="s-countbar" id="#waveform">
-            
-            </div> -->
+           
             <div id="waveform-<?= $afro_fetch['id']; ?>"></div>
             <div class="s-controls">
-                <button id="afroPlay<?= $afro_fetch['id']; ?>" title="play"><i class="fas fa-play <?= $afro_fetch['id']; ?>"></i></button>
-                <button id="afroStop" title="stop"><i class="fas fa-stop"></i></button>
-                <button id="afroMute" title="mute"><i class="fas fa-volume-up"></i></button>
+                <button id="afroPlay-<?= $afro_fetch['id']; ?>" title="play"><i class="fas fa-play <?= $afro_fetch['id']; ?>"></i></button>
             </div>
         </div>
         <p style="color: #fff;">Price: <?= $afro_fetch['price']; ?></p>
@@ -62,34 +58,23 @@
         $(document).ready(function () {
             $("#waveform-<?= $afro_fetch['id']; ?>").empty();
 
-            const wavesurfer-<?= $afro_fetch['id']; ?> = WaveSurfer.create({
+            const wavesurfer = WaveSurfer.create({
             container: '#waveform-<?= $afro_fetch['id']; ?>',
             waveColor: '#4F4A85',
-            progressColor: '#383351',
-            // height: 50,
-            // barWidth: 2,
-            // barGap: 2,
-            // barRadius: 0,
-            // cursorWidth: 1,
-            // hideScrollbar: true,
-            // pixelRatio: 2,
-            // partialRender: true,
-            // responsive: true,
-            // splitChannels: false,
-            // normalize: true,
-            // barMinHeight: 1,
-            // fillParent: true,
-            // autoCenter: true,
-            // backend: 'MediaElement',
-            // mediaType: 'audio',
+            progressColor: '#FF6347',
+            height: 35,
+            barWidth: 2,
+            barGap: 2,
+            responsive: true,
+            mediaType: 'audio',
             url: '/Beats and sounds store/Audio/<?= $afro_fetch['audio']; ?>'
 
            }); 
            
-           const afroPlay-<?= $afro_fetch['id']; ?> = document.getElementById('afroPlay-<?= $afro_fetch['id']; ?>');
+           const afroPlay = document.getElementById('afroPlay-<?= $afro_fetch['id']; ?>');
 
-            afroPlay-<?= $afro_fetch['id']; ?>.addEventListener('click', () => {
-                wavesurfer-<?= $afro_fetch['id']; ?>.playPause();
+            afroPlay.addEventListener('click', () => {
+                wavesurfer.playPause();
                 
             });  
         });

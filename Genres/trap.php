@@ -38,14 +38,10 @@
         </div>
         <div class="margin genre-container-s-details">
             <p><?= $trap_fetch['beat_name']; ?> - by: <?= $trap_fetch['author']; ?></p>
-            <!-- <div class="s-countbar">
-            
-            </div> -->
+        
             <div id="waveform-<?= $trap_fetch['id']; ?>"></div>
             <div class="s-controls">
-                <button id="trapPlay<?= $trap_fetch['id']; ?>" title="play"><i class="fas fa-play <?= $trap_fetch['id']; ?>"></i></button>
-                <button id="trapStop" title="stop"><i class="fas fa-stop"></i></button>
-                <button id="trapMute" title="mute"><i class="fas fa-volume-up"></i></button>
+                <button id="trapPlay-<?= $trap_fetch['id']; ?>" title="play"><i class="fas fa-play <?= $trap_fetch['id']; ?>"></i></button>
             </div>
         </div>
         <p style="color: #fff;">Price: <?= $trap_fetch['price']; ?></p>
@@ -58,34 +54,23 @@
         $(document).ready(function () {
             $("#waveform-<?= $trap_fetch['id']; ?>").empty();
 
-            const wavesurfer-<?= $trap_fetch['id']; ?> = WaveSurfer.create({
+            const wavesurfer = WaveSurfer.create({
             container: '#waveform-<?= $trap_fetch['id']; ?>',
             waveColor: '#4F4A85',
-            progressColor: '#383351',
-            // height: 50,
-            // barWidth: 2,
-            // barGap: 2,
-            // barRadius: 0,
-            // cursorWidth: 1,
-            // hideScrollbar: true,
-            // pixelRatio: 2,
-            // partialRender: true,
-            // responsive: true,
-            // splitChannels: false,
-            // normalize: true,
-            // barMinHeight: 1,
-            // fillParent: true,
-            // autoCenter: true,
-            // backend: 'MediaElement',
-            // mediaType: 'audio',
+            progressColor: '#FF6347',
+            height: 35,
+            barWidth: 2,
+            barGap: 2,
+            responsive: true,
+            mediaType: 'audio',
             url: '/Beats and sounds store/Audio/<?= $trap_fetch['audio']; ?>'
 
            }); 
            
-           const trapPlay-<?= $trap_fetch['id']; ?> = document.getElementById('trapPlay-<?= $trap_fetch['id']; ?>');
+           const trapPlay = document.getElementById('trapPlay-<?= $trap_fetch['id']; ?>');
 
-            trapPlay-<?= $trap_fetch['id']; ?>.addEventListener('click', () => {
-                wavesurfer-<?= $trap_fetch['id']; ?>.playPause();
+            trapPlay.addEventListener('click', () => {
+                wavesurfer.playPause();
                 
             });  
         });
