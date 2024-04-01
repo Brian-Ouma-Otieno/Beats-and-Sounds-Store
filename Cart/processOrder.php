@@ -17,7 +17,7 @@
         } 
 
         if (!empty($phone_number)) {
-            if (!preg_match("/^([0-9]{10})*$/",$phone_number)) {
+            if (!preg_match("/^([0-9]{12})*$/",$phone_number)) {
                 
                 $error[] = 'Please provide the correct phone number.';
                 $success = false;
@@ -38,14 +38,14 @@
             $Type_of_Transaction = 'CustomerPayBillOnline';
             // Authenticate and return the API token used for accessing Lipa Na Mpesa services in Safaricom Daraja
             $Token_URLauthorization = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
-            // $phone_number = $_POST['chkNum'];
-            $phone_number = '254716307679';
+            $phone_number = $_POST['chkNum'];
+            // $phone_number = '254716307679';
             // Initiates online payment on behalf of a customer.
             $OnlinePaymentRequest = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
             $total_amount = '1';
             // $CallBackURL = 'https://2f50f430.ngrok.io/callback.php?key=your password';
             // URL used to receive notifications from Mpesa API.
-            $CallBackURL = 'https://e0a9-105-162-11-186.ngrok-free.app/Beats%20and%20sounds%20store/callback.php';
+            $CallBackURL = 'https://f831-105-162-11-182.ngrok-free.app/Beats%20and%20Sounds%20Store/callback.php';
             // $CallBackURL = "https://mydomain.com/path";
             date_default_timezone_set("Africa/Nairobi");
             $Time_Stamp = date("Ymdhis");
