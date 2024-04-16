@@ -59,7 +59,7 @@
         </div>
         
         <div class="margin form-group-child col-3">
-            <button type="submit" name="data_sub">Add Beat</button>
+            <button title="add beat" type="submit" name="data_sub">Add Beat</button>
         </div>
     </div>
 

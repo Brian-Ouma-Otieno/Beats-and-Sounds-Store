@@ -22,7 +22,7 @@
     
     $sql_cart = "SELECT * FROM cart WHERE reg_userCartid = $_SESSION[reg_user]";
     $cart_query = mysqli_query($db_connect,$sql_cart);
-    $cart_query_num_rows = mysqli_num_rows($cart_query);
+    $cart_query_num_rows = mysqli_num_rows($cart_query); 
     $cartSum = "SELECT SUM(price) AS Totalprice FROM cart WHERE reg_userCartid = $_SESSION[reg_user]";
     $cartSumQuery = mysqli_query($db_connect,$cartSum);
     $cartSumFetch = mysqli_fetch_assoc($cartSumQuery);
@@ -76,7 +76,7 @@
             date_add($date,date_interval_create_from_date_string("1 day"));
             $selectCartDateFormart = date_format($date,"Y-m-d H:i:s");
             
-            date_default_timezone_set("Africa/Nairobi");
+            
             $nowDate = date("Y-m-d H:i:s");
             if ($selectCartDateFormart <= $nowDate) { 
                 $sql_cartRemove = "DELETE FROM cart WHERE reg_userCartid = $_SESSION[reg_user] AND expire_date = '$selectCartDate'"; 
@@ -88,37 +88,37 @@
 
 ?> 
 
-        <?php  while($cart_fetch = mysqli_fetch_assoc($cart_query)):  ?>
-            
-                <div id="reload" class="margin pos-middle cart-container">
-                    <div class="pos-middle item-img genre-container-s-pic" style="background-image: url('<?= $cart_fetch['image']; ?>'); background-size: cover;">
-                        <button title="play"><i class="fas fa-play"></i></button>
-                    </div>
-                    <div class="margin genre-container-s-details">
-                        <p><?= $cart_fetch['beat_name']; ?> - <?= $cart_fetch['author']; ?></p>
-                        <div class="s-countbar">
-                        
-                        </div>
-                    </div>
-                    <p>Price: <?= $cart_fetch['price']; ?></p>
-                    <div class="margin genre-container-s-btn pos-middle">
-                        <!-- <form action="processingOrders.php" method="post"> -->
-                            <input type="hidden" name="checkout" value="<?= $cart_fetch['id'];?>">
-                            <button title="check out" id="checkOut" name="checkoutBtn">Check Out</i></button>   
-                        <!-- </form> -->
-                        <div class="col-1">
-                            <input type="hidden" name="beatremove" value="<?= $cart_fetch['id'];?>"> <button type="submit" name="remove" title="remove" onclick="del(<?= $cart_fetch['id'];?>)">Remove</button>
-                        </div>                      
-                    </div>
+    <?php  while($cart_fetch = mysqli_fetch_assoc($cart_query)):  ?>
+        
+        <div id="reload" class="margin pos-middle cart-container">
+            <div class="pos-middle item-img genre-container-s-pic" style="background-image: url('<?= $cart_fetch['image']; ?>'); background-size: cover;">
+                <i title="play" id="cartPlay-<?= $cart_fetch['id']; ?>" class="fas fa-play <?= $cart_fetch['id']; ?>" onclick="changeIcon(this)"></i>
+                <button title="play"><i class="fas fa-play"></i></button>
+            </div>
+            <div class="margin genre-container-s-details">
+                <p><?= $cart_fetch['beat_name']; ?> - <?= $cart_fetch['author']; ?></p>
+                <div class="s-countbar">
+                
                 </div>
-            
-        <?php endwhile; ?>
+            </div>
+            <p>Price: <?= $cart_fetch['price']; ?></p>
+            <div class="margin genre-container-s-btn pos-middle">
+                <!-- <form action="processingOrders.php" method="post"> -->
+                    <input type="hidden" name="checkout" value="<?= $cart_fetch['id'];?>">
+                    <button title="check out" id="checkOut" name="checkoutBtn">Check Out</i></button>   
+                <!-- </form> -->
+                <div class="col-1">
+                    <input type="hidden" name="beatremove" value="<?= $cart_fetch['id'];?>"> <button type="submit" name="remove" title="remove" onclick="del(<?= $cart_fetch['id'];?>)">Remove</button>
+                </div>                      
+            </div>
+        </div>
+        
+    <?php endwhile; ?>
 
 <?php  
         $sqlPcheckOut = "SELECT * FROM regular_users WHERE id = $_SESSION[reg_user]";
         $PcheckOutQuery = mysqli_query($db_connect,$sqlPcheckOut);
         $PcheckOutFetch = mysqli_fetch_assoc($PcheckOutQuery);
-        // date_default_timezone_set("Africa/Nairobi");
         $pinCode = 'BSS_'.date("Ymdhis");
 
         }
@@ -153,12 +153,12 @@
                 <td>0</td>
             </tr>
             <tr>
-                <td colspan=''>Total</td>
+                <td colspan=''>Total Amount</td>
                 <td><?=((isset($_SESSION['reg_user']) && $cart_query_num_rows > 0 )? $cartSumFetch['Totalprice']:'0');?></td>
                 <td>0</td>
             </tr>
             <tr>
-                <td>Grand Total</td>
+                <td>Grand Total Amount</td>
                 <td colspan='2'><?=((isset($_SESSION['reg_user']) && $cart_query_num_rows > 0 )? $cartSumFetch['Totalprice']:'0');?></td>
                 <!-- <td colspan='2'>0</td> -->
             </tr>

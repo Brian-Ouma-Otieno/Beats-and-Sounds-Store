@@ -28,35 +28,18 @@ window.onclick = function(event) {
 
 
 
-// form display
-const login = document.getElementById('form-content2');
-const signup = document.getElementById('form-content');
-const login_btn = document.getElementById('login-btn');
-const signup_btn = document.getElementById('signup-btn');
+// changing audio icons when playing music
+const changeIcon = (icon) => {
+  const IsPlaying = icon.classList.contains('fa-play');
 
-// display function 
-const display = (x) => {
-
-  x.style.display = 'flex';
-  
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-  if (event.target == x) {
-    x.style.display = "none";
-    }
+  if(IsPlaying){
+      icon.classList.remove("fa-play");
+      icon.classList.add("fa-pause");
+  } else{
+      icon.classList.remove("fa-pause");
+      icon.classList.add("fa-play");
   }
-
-return x;
 }
-
-// displaying login form
-// login_btn.addEventListener('click', e =>{
-//   display(login);
-// } );
-// displaying signup form
-// signup_btn.addEventListener('click', e =>{
-//   display(signup);
-// } );
 
 
 
@@ -74,7 +57,6 @@ next.addEventListener('click', () => {
   if(carouselTrack.offsetWidth - (index * carouselContainerWidth) < carouselContainerWidth){
     next.classList.add('hide');
     }
-  // console.log(carouselTrack);
 });
 
 prev.addEventListener('click', () => {
@@ -89,75 +71,55 @@ prev.addEventListener('click', () => {
   carouselTrack.style.transform = `translateX(-${index * carouselContainerWidth}px)`
 });
 
-// console.log(carouselContainerWidth);
-// next.onclick = function(){alert("hello");} 
 
 
-const form = document.getElementById('form1');
-const username = document.getElementById('uname');
-const email = document.getElementById('mail');
-// const password = document.getElementById('pswd');
-const password2 = document.getElementById('password2');
-// const pswdRequirement = document.getElementById('pswdRequirement');
 
+// adding items to cart and toast notification display
+function addTocart(id,user){  
 
-// // When the user clicks on the password field, show the message box
-// password.onfocus = function() {
-//   pswdRequirement.style.display = "block";
-// }
+  const toastBox = document.getElementById('toastBox');    
+  const successMsg = '<i class="fas fa-check-circle"></i> Added to cart'; 
+  const errorMsg = '<i class="fas fa-exclamation-circle"></i> Please log in ';
 
-// // When the user clicks outside of the password field, hide the message box
-// password.onblur = function() {
-//   pswdRequirement.style.display = "none";
-// }
-
-
-// form.addEventListener('submit', (e) => {
-//   e.preventDefault;
-//   checkInputs();
-// } );
-
-// function checkInputs(){
-//   // get the values from the inputs
-//   const usernameValue = username.value.trim();
-//   const emailValue = email.value.trim();
-//   const passwordValue = password.value.trim();
-//   const password2Value = password2.value.trim();
-
-//   if(usernameValue == ''){
-//     // show error
-//     // add error class
-//     setErrorFor(username, 'Username cannot be blank');
-//   }else{
-//     // add success class
-//     setSuccessFor(username);
-//   }
-// }
-
-// function setErrorFor(input, message){
-//   const formControl = input.parentElement; // .form control
-//   // const small = formControl.querySelector('small');
-
-//   // add error message inside small
-//   small.innerText = message;
-
-//   // add error class
-//   formControl.className = 'form-control error';
+  const beatId = id;
+  const User = user;
   
-// }
+  const data = {"Bid" : beatId};
 
-// function setSuccessFor(input){
-//   const formControl = input.parentElement;
-//   formControl.className = 'form-control success';
-// }
+  const toast = document.createElement('div');
+  toast.classList.add('toast');
+  toast.innerHTML = successMsg;
+  toastBox.appendChild(toast);
 
-// function show_genre(){
   
-// }
+  if (User == true) {
 
-// alert('ok');
-// var  a =5; var b=5;var c =a+b;
-// console.log(c);
+    toast.innerHTML = successMsg;
+    setTimeout(() => {
+      toast.remove();
+    },1000);
+
+    $(document).ready(function () {      
+      jQuery.ajax({
+        url : '/Beats and sounds store/Genres/addTocart.php',
+        method : 'POST',
+        data : data,   
+        success: function(response){
+          $(document).ready(function () {        
+          setTimeout(function(){ location.reload(true);},1000);                
+        });},                                       
+        error : function(){alert("Something went wrong");}
+      }); 
+    }); 
+  } else{
+    toast.innerHTML = errorMsg;
+    toast.classList.add('error');
+    setTimeout(() => {
+      toast.remove();
+    },2000);
+  }  
+}
+
 
 
 // deleting cart items
@@ -199,6 +161,9 @@ function delAll(idAll) {
   });  
 }
 
+
+
+
 // auto cart delete
 function autoDel(autocartDel1, autocartDel2, autocartDel3 ) {
   let autocartDlt1 = autocartDel1;
@@ -220,6 +185,10 @@ function autoDel(autocartDel1, autocartDel2, autocartDel3 ) {
       }); 
   });  
 }
+
+
+
+
 
 
 

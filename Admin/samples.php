@@ -72,7 +72,7 @@
         </div>
         
         <div class="margin form-group-child col-3">
-            <button type="submit" name="smp_sub">Add Samples</button>
+            <button title="add sample" type="submit" name="smp_sub">Add Samples</button>
         </div>
     </div>
 
