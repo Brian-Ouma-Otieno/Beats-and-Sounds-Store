@@ -12,51 +12,6 @@
 </div> -->
 
 <script src="/Beats and sounds store/Js/script.js"></script>
-<script>
-
-    const afroSection = document.querySelector('.afro-section');
-    const playBtn = document.getElementById('play');
-    const stopBtn = document.getElementById('stopBtn');
-    const volumeBtn = document.getElementById('volumeBtn');
-
-    const play = document.querySelector('.fas-fa-play');
-    const pause = document.querySelector('.fas-fa-pause');
-
-    function playSong() {
-        afroSection.classList.add('play');
-        // play.style.display ='none';
-        // pause.style.display ='block';        
-    }
-
-    function pauseSong(){
-        afroSection.classList.remove('play');
-        // pause.style.display ='none';
-        // play.style.display ='block';
-    }
-
-    playBtn.addEventListener('click', () => {
-        console.log('hello');
-        const isPlaying = afroSection.classList.contains('play');
-
-        if(isPlaying){
-            pauseSong();
-        } else{
-            playSong();
-        }
-    });
-
-    function audioControl(audioId) {
-        const audio = audioId;
-
-        const wavesurfer = WaveSurfer.create({
-        container: '#waveform',
-        waveColor: '#4F4A85',
-        progressColor: '#383351',
-        url: '/Beats and sounds store/Audio/',
-    }) 
-    }
-
-</script>
 
 
 <script>
@@ -81,27 +36,6 @@
         });
     });
 
-
-    function addTocart(id){       
-        const beatId = id;
-        // const feature = featured;
-        
-        const data = {"Bid" : beatId};
-        // const data = {"Bid" : beatId, "featured" : feature};
-        $(document).ready(function () {
-            
-            jQuery.ajax({
-                url : '/Beats and sounds store/Genres/addTocart.php',
-                method : 'POST',
-                data : data,   
-                success: function(response){
-                    $(document).ready(function () {        
-                    setTimeout(function(){ location.reload(true);},10);                
-                });},                                       
-                error : function(){alert("Something went wrong");}
-            }); 
-        }); 
-    }
 
     // Get the check out btn
     const checkOut = document.getElementById("checkOut");
@@ -132,61 +66,24 @@
 
     // check out process
     $(document).ready(function(){           
-        $("#processOrder").submit(function(event){
-            event.preventDefault();               
-            const chkUname = $("#checkOutusername").val();
-            const chkEmail = $("#checkOutmail").val();
-            const chkNum = $("#checkOutnum").val();
-            const chkPin = $("#checkOutpin").val();
-            const chkOutbtn = $("#checkOutbtn").val();
-            $(".chkMessage").load("../Cart/processOrder.php", {
-                chkUname: chkUname,
-                chkEmail: chkEmail,
-                chkNum: chkNum,
-                chkPin: chkPin,
-                chkOutbtn: chkOutbtn                    
-            });              
-        });
+    $("#processOrder").submit(function(event){
+        event.preventDefault();               
+        const chkUname = $("#checkOutusername").val();
+        const chkEmail = $("#checkOutmail").val();
+        const chkNum = $("#checkOutnum").val();
+        const chkPin = $("#checkOutpin").val();
+        const chkOutbtn = $("#checkOutbtn").val();
+        $(".chkMessage").load("../Cart/processOrder.php", {
+            chkUname: chkUname,
+            chkEmail: chkEmail,
+            chkNum: chkNum,
+            chkPin: chkPin,
+            chkOutbtn: chkOutbtn                    
+        });              
+    });
     });
 
 
-
-    
-    // function del(id) {
-    //     var del = id;
-    //     var data = {"Delid" : del};
-
-    //     $(document).ready(function () {
-
-    //         jQuery.ajax({
-    //             url : '/Beats and sounds store/Cart/cartHandler.php',
-    //             method : 'POST',
-    //             data : data,   
-    //             success: function(response){
-    //                 $(document).ready(function () {        
-    //                 setTimeout(function(){ location.reload(true);},10);        
-    //                 // setTimeout(function(){ alert("Deleted");},1000);        
-    //             });},                                       
-    //             error : function(){alert("Something went wrong");}
-    //         }); 
-    //     });
-
-        
-    // }
-
-    // const genreModall = document.getElementById("genre-modal");
-    // const genreBtnn = document.getElementById("genre-btn");
-    // genreBtnn.addEventListener('click', () => {
-    //     genreModall.classList.toggle('hide');
-    // //   console.log('hello');
-    // //   alert('hello');
-    // });
-
-    // function autoRefresh() {
-    //     $(document).ready(function () {        
-    //         setTimeout(function(){ location.reload(true);},1000);        
-    //     });
-    // }
     
     const pswdRequirement = document.getElementById('pswdRequirement');
     const password = document.getElementById('pswd');

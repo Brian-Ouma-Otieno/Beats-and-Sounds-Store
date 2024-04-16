@@ -25,7 +25,7 @@
             <div class="item-container">
                 <div class="item-child">
                     <div class="item-img pos-middle" style="background-image: url('<?= $afro_fetch['image']; ?>'); background-size: cover;">
-                        <button id="play" title="play"><i class="fas fa-play"></i></button>
+                        <i title="play" class="fas fa-play" onclick="changeIcon(this)"></i>
                     </div>
                     <div class="carousel-details">
                         <p><a href="/Beats and sounds store/genres/afrobeats.php?id=<?= $afro_fetch['id']; ?>"><?= $afro_fetch['beat_name']; ?></a></p>                         
@@ -33,10 +33,8 @@
                     </div>
                 </div>
             </div>
-            <?php endwhile;?>
-            
+            <?php endwhile;?>           
         </div>
-        
     </div>
 
 
@@ -49,7 +47,7 @@
             <div class="item-container">
                 <div class="item-child">
                     <div class="item-img pos-middle" style="background-image: url('<?= $amapiano_fetch['image']; ?>'); background-size: cover;">
-                        <button title="play"><i class="fas fa-play"></i></button>
+                        <i title="play" class="fas fa-play" onclick="changeIcon(this)"></i>
                     </div>
                     <div class="carousel-details">
                         <p><a href="/Beats and sounds store/genres/amapiano.php?id=<?= $amapiano_fetch['id']; ?>"><?= $amapiano_fetch['beat_name']; ?></a></p>
@@ -71,7 +69,7 @@
             <?php  while($trap_fetch = mysqli_fetch_assoc($trap_query)):  ?>
                 <div class="trap-child">
                     <div class="trap-img pos-middle item-img" style="background-image: url('<?= $trap_fetch['image']; ?>'); background-size: cover;">
-                        <button title="play"><i class="fas fa-play"></i></button>
+                        <i title="play" class="fas fa-play" onclick="changeIcon(this)"></i>
                     </div>
                     <div class="trap-details carousel-details">
                         <p><a href="/Beats and sounds store/genres/trap.php?id=<?= $trap_fetch['id']; ?>"><?= $trap_fetch['beat_name']; ?></a></p>

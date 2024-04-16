@@ -26,7 +26,17 @@
     $sql_trap = "SELECT id FROM trap";
     $trap_query = mysqli_query($db_connect,$sql_trap);
     $trap_fetch = mysqli_fetch_assoc($trap_query);
- 
+
+
+    // listing all the beats added to cart 
+    if (isset($_SESSION['reg_user'])) {       
+        $cartCount = $_SESSION['reg_user'];        
+        $cartCountnumRows = mysqli_num_rows(mysqli_query($db_connect,"SELECT * FROM cart WHERE reg_userCartid = $cartCount"));
+        $cartCount = true;
+    }else {
+        $cartCount = false;
+    }
+    
 ?>
     
 <!-- navbar -->
@@ -36,7 +46,7 @@
         <button id="genre-btn" title="show genres">Genres</button>
     </div>
     <div class="l-nav pos-middle" style="display:flex; flex-direction:row;">
-        <a title="cart" href="/Beats and sounds store/cart/cart.php">Cart <i class="fas fa-shopping-cart"></i></a>
+        <a title="cart" href="/Beats and sounds store/cart/cart.php">Cart <i class="fas fa-shopping-cart"><span style="color: red;"><?=((isset($_SESSION['reg_user']) && $cartCountnumRows > 0 )? $cartCountnumRows:'');?></span> </i></a>
 
         <?php 
             if(isset($_SESSION['reg_user'])){

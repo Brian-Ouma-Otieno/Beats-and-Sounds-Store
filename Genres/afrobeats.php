@@ -28,7 +28,6 @@
     $sql_afro = "SELECT * FROM beats WHERE genre = 'afrobeats' AND featured = 0";
     $afro_query = mysqli_query($db_connect,$sql_afro);
 
-
 ?>
 
 <h3 class="margin h3">Afro beats</h3>
@@ -44,13 +43,13 @@
             <p><?= $afro_fetch['beat_name']; ?> - by: <?= $afro_fetch['author']; ?></p>
            
             <div id="waveform-<?= $afro_fetch['id']; ?>"></div>
-            <div class="s-controls">
-                <button id="afroPlay-<?= $afro_fetch['id']; ?>" title="play"><i class="fas fa-play <?= $afro_fetch['id']; ?>"></i></button>
+            <div class="s-controls">               
+                <i id="afroPlay-<?= $afro_fetch['id']; ?>" title="play" class="fas fa-play <?= $afro_fetch['id']; ?>" onclick="changeIcon(this)"></i>
             </div>
         </div>
         <p style="color: #fff;">Price: <?= $afro_fetch['price']; ?></p>
         <div class="margin genre-container-s-btn">
-            <button name="addToCart" title="add to cart" onclick="addTocart(<?= $afro_fetch['id']; ?>)">Add to Cart <i class="fas fa-shopping-cart"></i></button> 
+            <button name="addToCart" id="cartBtn" title="add to cart" onclick="addTocart(<?= $afro_fetch['id']; ?>,<?=((isset($_SESSION['reg_user']))? true:false);?>)">Add to Cart <i class="fas fa-shopping-cart"></i></button> 
         </div>
     </div>
 
@@ -78,11 +77,10 @@
                 
             });  
         });
-    </script>
-    
+    </script>    
 <?php endwhile; ?>
 
-
+<div id="toastBox"></div>
 
 
 
