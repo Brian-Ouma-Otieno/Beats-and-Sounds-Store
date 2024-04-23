@@ -1,20 +1,22 @@
 <footer class="margin" id="footer" style="margin-top:50px;text-align:center;">&copy; Copyright 2022 - <?php echo date("Y");?> Beats and Sounds Store</footer>
 
-<!-- <div class="margin audio-control-container genre-container-s-details">
-    <div class="audio-controls pos-middle">        
-        <div class="s-controls">
-            <button title="play" id="playBtn"><i class="fas fa-play"></i></button>
-           
-        </div> 
-        
-        <div id="waveform"></div>
-    </div>
-</div> -->
+
+<!-- toast notification display -->
+<div id="toastBox"></div>
+
 
 <script src="/Beats and sounds store/Js/script.js"></script>
 
-
 <script>
+
+    // displaying progress bar
+    // const display = document.getElementById('display');
+    // const displayBar = document.getElementById('displayBar');
+    // display.addEventListener('click', () => {
+    //     // displayBar.style.display = "block";
+    //     displayBar.style.display = "block";
+    // });
+
     $(document).ready(function(){
         $("#live_search").keyup(function(){
 

@@ -33,20 +33,18 @@
 
 <?php  while($trap_fetch = mysqli_fetch_assoc($trapQuery)):  ?>
     <div class="margin pos-middle genre-container-s">
-        <div class="margin genre-container-s-pic" style="background-image: url('<?= $trap_fetch['image']; ?>'); background-size: cover;">
-            
+        <div class="margin genre-container-s-pic pos-middle" style="background-image: url('<?= $trap_fetch['image']; ?>'); background-size: cover;">
+             <div class="s-controls">
+                <i id="trapPlay-<?= $trap_fetch['id']; ?>" title="play" class="fas fa-play <?= $trap_fetch['id']; ?>" onclick="changeIcon(this)"></i>
+            </div>
         </div>
         <div class="margin genre-container-s-details">
-            <p><?= $trap_fetch['beat_name']; ?> - by: <?= $trap_fetch['author']; ?></p>
-        
-            <div id="waveform-<?= $trap_fetch['id']; ?>"></div>
-            <div class="s-controls">
-                <button id="trapPlay-<?= $trap_fetch['id']; ?>" title="play"><i class="fas fa-play <?= $trap_fetch['id']; ?>"></i></button>
-            </div>
+            <p><?= $trap_fetch['beat_name']; ?> - by: <?= $trap_fetch['author']; ?></p>       
+            <div id="waveform-<?= $trap_fetch['id']; ?>"></div>          
         </div>
         <p style="color: #fff;">Price: <?= $trap_fetch['price']; ?></p>
         <div class="margin genre-container-s-btn">
-        <button name="addToCart" title="add to cart" onclick="addTocart(<?= $trap_fetch['id']; ?>)">Add to Cart <i class="fas fa-shopping-cart"></i></button> 
+        <button name="addToCart" title="add to cart" onclick="addTocart(<?= $trap_fetch['id']; ?>,<?=((isset($_SESSION['reg_user']))? true:false);?>)">Add to Cart <i class="fas fa-shopping-cart"></i></button> 
         </div>
     </div>
 

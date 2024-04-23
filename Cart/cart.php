@@ -93,25 +93,47 @@
         <div id="reload" class="margin pos-middle cart-container">
             <div class="pos-middle item-img genre-container-s-pic" style="background-image: url('<?= $cart_fetch['image']; ?>'); background-size: cover;">
                 <i title="play" id="cartPlay-<?= $cart_fetch['id']; ?>" class="fas fa-play <?= $cart_fetch['id']; ?>" onclick="changeIcon(this)"></i>
-                <button title="play"><i class="fas fa-play"></i></button>
             </div>
             <div class="margin genre-container-s-details">
                 <p><?= $cart_fetch['beat_name']; ?> - <?= $cart_fetch['author']; ?></p>
-                <div class="s-countbar">
+                <div id="waveform-<?= $cart_fetch['id']; ?>"></div>
+                <!-- <div class="s-countbar">
                 
-                </div>
+                </div> -->
             </div>
             <p>Price: <?= $cart_fetch['price']; ?></p>
             <div class="margin genre-container-s-btn pos-middle">
-                <!-- <form action="processingOrders.php" method="post"> -->
                     <input type="hidden" name="checkout" value="<?= $cart_fetch['id'];?>">
                     <button title="check out" id="checkOut" name="checkoutBtn">Check Out</i></button>   
-                <!-- </form> -->
                 <div class="col-1">
                     <input type="hidden" name="beatremove" value="<?= $cart_fetch['id'];?>"> <button type="submit" name="remove" title="remove" onclick="del(<?= $cart_fetch['id'];?>)">Remove</button>
                 </div>                      
             </div>
         </div>
+
+        <script>
+            $(document).ready(function () {
+                $("#waveform-<?= $cart_fetch['id']; ?>").empty();
+
+                const wavesurfer = WaveSurfer.create({
+                container: '#waveform-<?= $cart_fetch['id']; ?>',
+                waveColor: '#4F4A85',
+                progressColor: '#FF6347',
+                height: 35,
+                barWidth: 2,
+                barGap: 2,
+                responsive: true,
+                mediaType: 'audio',
+                url: '/Beats and sounds store/Audio/<?= $cart_fetch['audio']; ?>'
+            }); 
+            
+            const cartPlay = document.getElementById('cartPlay-<?= $cart_fetch['id']; ?>');
+
+                cartPlay.addEventListener('click', () => {
+                    wavesurfer.playPause();                    
+                });  
+            });
+        </script>    
         
     <?php endwhile; ?>
 

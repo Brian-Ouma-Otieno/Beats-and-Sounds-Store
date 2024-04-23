@@ -50,6 +50,7 @@
 
         <?php 
             if(isset($_SESSION['reg_user'])){
+                echo '<a title="downloads" href="/Beats and sounds store/download.php">Downloads</a>';
                 echo '<a title="logout" href="/Beats and sounds store/Users/logout.php">Logout</a>';
             }else {
                 echo '<a title="signup" href="/Beats and sounds store/Users/signup.php">Signup</a>';

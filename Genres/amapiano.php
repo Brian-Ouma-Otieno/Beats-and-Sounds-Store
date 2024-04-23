@@ -33,20 +33,18 @@
 
 <?php  while($amapiano_fetch = mysqli_fetch_assoc($amapianoQuery)):  ?>
     <div class="margin pos-middle genre-container-s">
-        <div class="margin genre-container-s-pic" style="background-image: url('<?= $amapiano_fetch['image']; ?>'); background-size: cover;">
-            
+        <div class="margin genre-container-s-pic pos-middle" style="background-image: url('<?= $amapiano_fetch['image']; ?>'); background-size: cover;">
+            <div class="s-controls">
+                <i id="amapianoPlay-<?= $amapiano_fetch['id']; ?>" title="play" class="fas fa-play <?= $amapiano_fetch['id']; ?>" onclick="changeIcon(this)"></i>               
+            </div>
         </div>
         <div class="margin genre-container-s-details">
-            <p><?= $amapiano_fetch['beat_name']; ?> - by: <?= $amapiano_fetch['author']; ?></p>
-    
-            <div id="waveform-<?= $amapiano_fetch['id']; ?>"></div>
-            <div class="s-controls">
-                <button id="amapianoPlay-<?= $amapiano_fetch['id']; ?>" title="play"><i class="fas fa-play <?= $amapiano_fetch['id']; ?>"></i></button>
-            </div>
+            <p><?= $amapiano_fetch['beat_name']; ?> - by: <?= $amapiano_fetch['author']; ?></p>    
+            <div id="waveform-<?= $amapiano_fetch['id']; ?>"></div>           
         </div>
         <p style="color: #fff;">Price: <?= $amapiano_fetch['price']; ?></p>
         <div class="margin genre-container-s-btn">
-            <button name="addToCart" title="add to cart" onclick="addTocart(<?= $amapiano_fetch['id']; ?>)">Add to Cart <i class="fas fa-shopping-cart"></i></button> 
+            <button name="addToCart" title="add to cart" onclick="addTocart(<?= $amapiano_fetch['id']; ?>,<?=((isset($_SESSION['reg_user']))? true:false);?>)">Add to Cart <i class="fas fa-shopping-cart"></i></button> 
         </div>
     </div>
 
