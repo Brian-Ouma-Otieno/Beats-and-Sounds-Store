@@ -36,16 +36,14 @@
 
 <?php  while($afro_fetch = mysqli_fetch_assoc($afro_query)):  ?>
     <div class="margin pos-middle genre-container-s">
-        <div class="margin genre-container-s-pic" style="background-image: url('<?= $afro_fetch['image']; ?>'); background-size: cover;">
-            
-        </div>
-        <div class="margin genre-container-s-details">
-            <p><?= $afro_fetch['beat_name']; ?> - by: <?= $afro_fetch['author']; ?></p>
-           
-            <div id="waveform-<?= $afro_fetch['id']; ?>"></div>
+        <div class="margin genre-container-s-pic pos-middle" style="background-image: url('<?= $afro_fetch['image']; ?>'); background-size: cover;">
             <div class="s-controls">               
                 <i id="afroPlay-<?= $afro_fetch['id']; ?>" title="play" class="fas fa-play <?= $afro_fetch['id']; ?>" onclick="changeIcon(this)"></i>
             </div>
+        </div>
+        <div class="margin genre-container-s-details">
+            <p><?= $afro_fetch['beat_name']; ?> - by: <?= $afro_fetch['author']; ?></p>          
+            <div id="waveform-<?= $afro_fetch['id']; ?>"></div>            
         </div>
         <p style="color: #fff;">Price: <?= $afro_fetch['price']; ?></p>
         <div class="margin genre-container-s-btn">
@@ -80,7 +78,6 @@
     </script>    
 <?php endwhile; ?>
 
-<div id="toastBox"></div>
 
 
 
