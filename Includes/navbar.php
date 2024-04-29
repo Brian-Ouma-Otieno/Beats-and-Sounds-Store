@@ -32,6 +32,7 @@
     if (isset($_SESSION['reg_user'])) {       
         $cartCount = $_SESSION['reg_user'];        
         $cartCountnumRows = mysqli_num_rows(mysqli_query($db_connect,"SELECT * FROM cart WHERE reg_userCartid = $cartCount"));
+        $downloadCountnumRows = mysqli_num_rows(mysqli_query($db_connect,"SELECT * FROM transactions WHERE reg_userCartid = $cartCount"));
         $cartCount = true;
     }else {
         $cartCount = false;
