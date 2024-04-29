@@ -72,12 +72,16 @@
         event.preventDefault();               
         const chkUname = $("#checkOutusername").val();
         const chkEmail = $("#checkOutmail").val();
+        const chkAmount = $("#checkOutamount").val();
+        const chkId = $("#checkOutid").val();
         const chkNum = $("#checkOutnum").val();
         const chkPin = $("#checkOutpin").val();
         const chkOutbtn = $("#checkOutbtn").val();
         $(".chkMessage").load("../Cart/processOrder.php", {
             chkUname: chkUname,
             chkEmail: chkEmail,
+            chkAmount: chkAmount,
+            chkId: chkId,
             chkNum: chkNum,
             chkPin: chkPin,
             chkOutbtn: chkOutbtn                    
