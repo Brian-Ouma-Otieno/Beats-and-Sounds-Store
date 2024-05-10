@@ -64,7 +64,7 @@
 
 ?> 
 
-    <h4 class="margin"> <?= display_errors('Make Payment Using Mpesa'); ?> </h4>
+    <h4 class="margin"> <?= display_errors('Make Payment Using Mpesa Then Go To Downloads Page To Download The Beat.'); ?> </h4>
 
     <?php  while($cart_fetch = mysqli_fetch_assoc($cart_query)):  ?>
         
@@ -196,7 +196,6 @@
         </table>
     </div>
 </div>
-
 
 
 <?php

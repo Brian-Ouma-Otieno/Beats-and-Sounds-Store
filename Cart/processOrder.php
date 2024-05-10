@@ -47,7 +47,7 @@
             $OnlinePaymentRequest = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
 
             // URL used to receive notifications from Mpesa API.
-            $CallBackURL = 'https://9fdd-105-163-59-106.ngrok-free.app/Beats%20and%20sounds%20store/callback.php';
+            $CallBackURL = 'https://486c-105-163-59-106.ngrok-free.app/Beats%20and%20sounds%20store/callback.php';
 
             date_default_timezone_set("Africa/Nairobi");
             $Time_Stamp = date("Ymdhis");
@@ -65,7 +65,7 @@
 
             $token = json_decode($curl_Tranfer_response)->access_token;
 
-            // Initiating the STK push on the users’ phone
+            // // Initiating the STK push on the users’ phone
             $curl_Tranfer2 = curl_init();
             curl_setopt($curl_Tranfer2, CURLOPT_URL, $OnlinePaymentRequest);
             curl_setopt($curl_Tranfer2, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization:Bearer ' . $token));
@@ -96,7 +96,7 @@
 
             // echo json_encode($curl_Tranfer2_response, JSON_PRETTY_PRINT);
 
-            echo $curl_Tranfer2_response;
+            //print_r($curl_Tranfer2_response);
 
             $ResponseCode = $curl_Tranfer2_response->ResponseCode;
             
@@ -104,7 +104,7 @@
             if ($ResponseCode == 0) {
 
                  // updating feature and regUsercartid
-                $queryBeatid = mysqli_query($db_connect,"SELECT beat_id FROM cart WHERE id = $chkId AND reg_userCartid = $_SESSION[reg_user]");
+                $queryBeatid = mysqli_query($db_connect,"SELECT * FROM cart WHERE id = $chkId AND reg_userCartid = $_SESSION[reg_user]");
                 $sql_BeatidFetch = mysqli_fetch_assoc($queryBeatid);
                 $BeatidFetch = $sql_BeatidFetch['beat_id'];
                 $featureUsercartidUpdate = "UPDATE beats SET featured = 0, reg_userCartid = 0 WHERE id = $BeatidFetch AND reg_userCartid = $_SESSION[reg_user]";
@@ -114,13 +114,25 @@
                 $sql_cartRemove = "DELETE FROM cart WHERE id = $chkId";
                 mysqli_query($db_connect,$sql_cartRemove);
 
-                echo display_errors('Successful');
+                echo display_errors('Sent Successful. Enter your Mpesa pin to complete your payment.');
             // }                
             ?>
 
-            <!-- <Script>
-                setTimeout(function(){ location.reload(true);},10000); 
-            </Script>   -->
+            <Script>
+                let beatId = <?= $BeatidFetch; ?>;
+                let data = {"Beatid" : beatId};
+
+                $(document).ready(function () {
+                    jQuery.ajax({
+                        url : '/Beats and sounds store/callback.php',
+                        method : 'POST',
+                        data : data,   
+                        success: function(response){},                  
+                        error : function(){}
+                    }); 
+                }); 
+                setTimeout(function(){ location.reload(true);},5000);
+            </Script>  
 
       <?php  
             }else {
