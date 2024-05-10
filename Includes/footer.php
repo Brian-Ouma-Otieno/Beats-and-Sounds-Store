@@ -7,15 +7,8 @@
 
 <script src="/Beats and sounds store/Js/script.js"></script>
 
-<script>
 
-    // displaying progress bar
-    // const display = document.getElementById('display');
-    // const displayBar = document.getElementById('displayBar');
-    // display.addEventListener('click', () => {
-    //     // displayBar.style.display = "block";
-    //     displayBar.style.display = "block";
-    // });
+<script>
 
     $(document).ready(function(){
         $("#live_search").keyup(function(){
